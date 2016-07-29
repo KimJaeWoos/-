@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="7dp"
+    android:background="@color/md_blue_grey_50"
+    android:paddingBottom="1dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="1dp"
+    card_view:cardCornerRadius="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <com.jwoos.android.sellbook.widget.MLRoundedImageView
+                        android:id="@+id/card_profile"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="center" />
+
+                    <TextView
+                        android:id="@+id/card_nic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/card_profile"
+                        android:text="맛간동자"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/card_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="right"
+                        android:text="2016.05.26  18:44"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <HorizontalScrollView
+                    android:id="@+id/hori_scroll_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="false"
+                    android:foregroundGravity="left"
+                    android:scrollbars="none">
+
+
+                    <LinearLayout
+                        android:id="@+id/selected_photos_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:animateLayoutChanges="true"
+                        android:gravity="left"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+
+                        <!-- images will be added dynamicall to this layout -->
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/book_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="책 제목 : 컴퓨터구조론"
+                    android:textColor="@color/btn_text_color"
+                    android:textSize="15sp" />
+
+                <!--<TextView
+                    android:id="@+id/book_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="사용감이 전혀없습니다"
+                    android:textColor="@color/btn_text_color"
+                    android:textSize="15sp" />-->
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="...더보기"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/card_click"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </FrameLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0.5dp"
+            android:background="@color/md_grey_200"
+            android:paddingBottom="10dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorPrimary">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <!--<TextView
+                    android:id="@+id/book_price_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="판매가격 : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />-->
+
+                <com.jwoos.android.sellbook.widget.RialTextView
+                    android:id="@+id/book_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="183,500"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/favorite"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_bookmark_grey" />
+
+            <TextView
+                android:id="@+id/favorite_cnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/favorite"
+                android:text="0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/ripple"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="65dp"
+                app:mrl_rippleColor="@color/colorPrimary"
+                app:mrl_rippleHover="true"
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleRoundedCorners="20dp">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/comment"
+                    android:layout_width="30dp"
+                    android:layout_height="31dp"
+                    android:src="@drawable/ic_chat_bubble_outline_grey_500_24dp" />
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <TextView
+                android:id="@+id/comment_cnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dp"
+                android:layout_toRightOf="@+id/ripple"
+                android:text="0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/soldout_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sold_out"
+        android:gravity="center"
+        android:text="판매완료된 판매글 입니다"
+        android:textColor="@color/btn_background_color"
+        android:textSize="23sp"
+        android:visibility="gone" />
+</android.support.v7.widget.CardView>
+
+
+

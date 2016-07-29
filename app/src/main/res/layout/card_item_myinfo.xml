@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    android:background="@color/btn_background"
+    android:clickable="true"
+    android:foreground="@drawable/selector_cardview"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardUseCompatPadding="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/book_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textColor="@color/btn_text_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/book_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:maxLines="1"
+                android:textColor="#000000"
+                 />
+
+            <com.jwoos.android.sellbook.widget.RialTextView
+                android:id="@+id/book_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="7dp"
+                android:gravity="right"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/soldout_view"
+            android:textColor="@color/btn_background_color"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="판매완료"
+            android:visibility="gone"
+            android:background="@color/sold_out"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+
+    </FrameLayout>
+
+
+</android.support.v7.widget.CardView>

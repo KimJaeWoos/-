@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/page3_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/btn_background_color"
+            android:orientation="vertical">
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_phone"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/btn_background"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="전화번호를 입력하세요"
+                android:textStyle="bold"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/btn_background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="2"
+                    android:background="@color/btn_background"
+                    android:gravity="left|center"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:text="푸쉬알림 설정"
+                    android:textColor="@color/btn_text_color"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <com.rey.material.widget.Switch
+                    android:id="@+id/btn_setting_push"
+                    style="@style/Material.Widget.Switch"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:textColor="@drawable/selector_switch"
+                    app:sw_trackColor="#B0B0B0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/btn_background"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="여기보세요"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/btn_colortext_size"
+                android:textStyle="bold" />
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_notice"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/btn_background"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="공지사항"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <View
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="3px"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_homepage"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:background="@color/btn_background"
+                android:text="셀북 홈페이지"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <View
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="3px"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_facebook"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:background="@color/btn_background"
+                android:text="셀북 페이스북"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/btn_background"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="무엇이든 물어보세요"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/btn_colortext_size"
+                android:textStyle="bold" />
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_question"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:background="@color/btn_background"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="자주묻는 질문"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <View
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="3px"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_email"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:background="@color/btn_background"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="이메일 문의하기"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <View
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="3px"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_kakao"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:background="@color/btn_background"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="카카오톡 문의하기"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_margin="17dp"
+                android:background="@color/btn_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="여러분의 소중한 리뷰가 서비스를 발전시켜요"
+                    android:textColor="@color/md_blue_grey_800"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:text="센스있는 리뷰 기대할게요 :)"
+                    android:textColor="@color/md_blue_grey_800"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <com.rey.material.widget.Button
+                    android:id="@+id/play_store"
+                    style="@style/LightRaiseWaveColorButtonRippleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="평점 및 리뷰 쓰기"
+                    android:textColor="#EEEEEE"
+                    android:textSize="@dimen/btn_text_size" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/btn_background"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="이렇게 운영돼요"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/btn_colortext_size"
+                android:textStyle="bold" />
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_access"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:background="@color/btn_background"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="개인정보 취급방침"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <View
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="3px"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_access2"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:background="@color/btn_background"
+                android:text="서비스 이용약관"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <View
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="3px"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_opne"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="오픈소스 라이센스"
+                android:background="@color/btn_background"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/btn_background"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="기타"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/btn_colortext_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/btn_background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="2"
+                    android:background="@color/btn_background"
+                    android:gravity="left|center"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:text="버전정보"
+                    android:textColor="@color/btn_text_color"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <TextView
+                    android:id="@+id/app_version"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/btn_text_size" />
+            </LinearLayout>
+
+            <View
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="3px"/>
+
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_setting_logout"
+                style="@style/LightFlatWaveColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/btn_background"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/padding_left"
+                android:text="로그아웃"
+                android:textColor="@color/btn_text_color"
+                android:textSize="@dimen/btn_text_size" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

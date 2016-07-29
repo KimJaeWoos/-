@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">셀북</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tedpicker_title">이미지 선택</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6553137394733893/9884365566</string>
+
+    <string name="btn_duration">350</string>
+    <string name="btn_alpha">0.4</string>
+    <string name="search">책 제목을 입력하세요</string>
+
+
+</resources>

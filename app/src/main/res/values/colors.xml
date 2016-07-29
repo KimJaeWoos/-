@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#283593</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="colorAccent">#5C6BC0</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="colorPrimaryHalf">#9003A9F4</color>
+    <color name="colorControlNormal">#FF78909C</color>
+    <color name="spots_dialog_color">@null</color>
+    <color name="ripple_color">#453F51B5</color>
+
+
+    <color name="btn_background_color">#E6E6E6</color>
+    <color name="btn_comment_background_color">#33E6E6E6</color>
+    <color name="btn_background">#FFFFFF</color>
+    <color name="btn_background2">#33ffffff</color>
+    <color name="btn_text_color">#212121</color>
+    <color name="switch_color">#B0B0B0</color>
+    <color name="colorFocused">#bbdefb</color>
+    <color name="sold_out">#D3212121</color>
+    <color name="btn_ripple_white">#bbFFFFFF</color>
+
+
+    <!-- gogle color -->
+    <color name="red">#FFC93437</color>
+    <color name="blue">#FF375BF1</color>
+    <color name="yellow">#FFF7D23E</color>
+    <color name="green">#FF34A350</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>

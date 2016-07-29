@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="colors">
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorPrimaryDark</item>
+       <!-- <item>@color/selectiondialogs_materialdesign500_deep_purple</item>
+        <item>@color/selectiondialogs_materialdesign500_indigo</item>
+        <item>@color/selectiondialogs_materialdesign500_blue</item>
+        <item>@color/selectiondialogs_materialdesign500_light_blue</item>
+        <item>@color/selectiondialogs_materialdesign500_cyan</item>
+        <item>@color/selectiondialogs_materialdesign500_teal</item>
+        <item>@color/selectiondialogs_materialdesign500_green</item>
+        <item>@color/selectiondialogs_materialdesign500_light_green</item>
+        <item>@color/selectiondialogs_materialdesign500_lime</item>
+        <item>@color/selectiondialogs_materialdesign500_yellow</item>-->
+    </integer-array>
+
+    <string-array name="names">
+        <item>전공서적</item>
+        <item>교양서적</item>
+        <item>기타</item>
+
+    </string-array>
+
+    <string-array name="ids">
+        <item>2.red</item>
+        <item>3.pink</item>
+        <item>1.purple</item>
+    </string-array>
+
+    <integer-array name="google_colors">
+        <item>@color/red</item>
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+    </integer-array>
+
+    <array name="spinner_item">
+        <item>@style/LightSpinnerItem</item>
+    </array>
+
+    <array name="spinner">
+        <item>@style/LightSpinner</item>
+    </array>
+
+    <string-array name="values">
+        <item>소속대학을 선택하세요</item>
+        <item>경상대학</item>
+        <item>사회과학대학</item>
+        <item>자연과학대학</item>
+        <item>공과대학</item>
+        <item>정보통신대학</item>
+        <item>생명환경대학</item>
+        <item>조형예술대학</item>
+        <item>사범대학</item>
+        <item>재활과학대학</item>
+        <item>간호보건대학</item>
+    </string-array>
+
+
+</resources>

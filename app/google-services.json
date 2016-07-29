@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1097749790746",
+    "firebase_url": "https://sellbook-project.firebaseio.com",
+    "project_id": "sellbook-project",
+    "storage_bucket": "sellbook-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097749790746:android:9bef62a7eff29e71",
+        "android_client_info": {
+          "package_name": "com.jwoos.android.sellbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097749790746-lj3dji4rflomr7apdmg0f1tij5jeoi3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZEU07aYPLteIG9zXOPVydB5XwFXBZghw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

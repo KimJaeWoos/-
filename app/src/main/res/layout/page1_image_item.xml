@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingRight="15dp">
+
+
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/media_image"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="new post image"
+        android:visibility="visible" />
+
+
+</FrameLayout>
