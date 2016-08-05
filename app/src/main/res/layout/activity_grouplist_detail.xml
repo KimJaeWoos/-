@@ -41,7 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="12dp"
-                android:text="맛간동자"
                 android:textColor="@color/btn_background"
                 android:textSize="17sp"
                 android:textStyle="bold" />

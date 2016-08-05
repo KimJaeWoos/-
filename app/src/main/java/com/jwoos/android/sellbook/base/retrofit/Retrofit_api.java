@@ -2,6 +2,7 @@ package com.jwoos.android.sellbook.base.retrofit;
 
 
 import com.jwoos.android.sellbook.base.retrofit.model.Book_Info;
+import com.jwoos.android.sellbook.base.retrofit.model.Calling;
 import com.jwoos.android.sellbook.base.retrofit.model.Comment;
 import com.jwoos.android.sellbook.base.retrofit.model.Favorites;
 import com.jwoos.android.sellbook.base.retrofit.model.Login;
@@ -168,5 +169,10 @@ public interface Retrofit_api {
 
     @GET("/api/delete_fcm.php")
     void delete_fcm(Callback<Void> response);
+
+    @FormUrlEncoded
+    @POST("/api/calling_info.php")
+    void get_record(@Field("user_phone") String phoneNum,
+                    Callback<List<Calling>> response);
 
 }

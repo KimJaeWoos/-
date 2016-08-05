@@ -7,6 +7,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.jwoos.android.sellbook.R;
+import com.jwoos.android.sellbook.base.db.Preference;
 import com.jwoos.android.sellbook.utils.Dlog;
 import com.jwoos.android.sellbook.intro.SplashActivity;
 
@@ -42,7 +43,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Random random = new Random();
-        manager.notify(random.nextInt(),builder.build());
+
+        Preference pref = new Preference(this);
+        if (pref.getValue(true)) {
+            manager.notify(random.nextInt(),builder.build());
+        }
     }
 
 

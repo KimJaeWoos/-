@@ -20,6 +20,8 @@
     <color name="colorFocused">#bbdefb</color>
     <color name="sold_out">#D3212121</color>
     <color name="btn_ripple_white">#bbFFFFFF</color>
+    <color name="colorControlNormalHalf">#9078909C</color>
+    <color name="colorSwitchThumbNormal">#FF78909C</color>
 
 
     <!-- gogle color -->

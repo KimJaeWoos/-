@@ -20,8 +20,8 @@ android {
         applicationId "com.jwoos.android.sellbook"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -96,4 +96,5 @@ dependencies {
     compile 'com.github.d-max:spots-dialog:0.4@aar'
     compile project(':Search')
     compile 'com.balysv:material-ripple:1.0.2'
+    compile 'org.jsoup:jsoup:1.9.2'
 }

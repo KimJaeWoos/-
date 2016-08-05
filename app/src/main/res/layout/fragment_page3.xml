@@ -53,15 +53,13 @@
 
                 <com.rey.material.widget.Switch
                     android:id="@+id/btn_setting_push"
-                    style="@style/Material.Widget.Switch"
+                    style="@style/LightSwitch"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:gravity="center"
-                    android:textColor="@drawable/selector_switch"
-                    app:sw_trackColor="#B0B0B0" />
+                    android:gravity="center" />
 
             </LinearLayout>
 

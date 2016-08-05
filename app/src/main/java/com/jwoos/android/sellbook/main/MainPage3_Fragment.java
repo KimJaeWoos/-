@@ -35,6 +35,7 @@ import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.widget.Button;
+import com.rey.material.widget.Switch;
 import com.squareup.otto.Subscribe;
 
 import java.util.regex.Pattern;
@@ -58,14 +59,47 @@ public class MainPage3_Fragment extends BaseFragment implements View.OnClickList
     Button btn_phone;
     @BindView(R.id.app_version)
     TextView tv_version;
+    @BindView(R.id.btn_setting_push)
+    Switch sc_push;
 
+    private boolean push_flag;
+    private Preference pref;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_page3, container, false);
         ButterKnife.bind(this, rootView);
+        pref = new Preference(getActivity());
+        setPhoneNumber();
+        setVeision();
+        setPush();
+        return rootView;
+    }
 
+    private void setPush() {
+        push_flag = pref.getValue(true);
+        Dlog.d(String.valueOf(push_flag));
+        if (push_flag) {
+            sc_push.setChecked(true);
+        } else {
+            sc_push.setChecked(false);
+        }
+
+    }
+
+    private void setVeision() {
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String verSion = pInfo.versionName;
+        tv_version.setText(verSion);
+    }
+
+    private void setPhoneNumber() {
         ServiceGenerator.getService().set_userPhone("1", new Callback<String>() {
             @Override
             public void success(String s, Response response) {
@@ -77,16 +111,6 @@ public class MainPage3_Fragment extends BaseFragment implements View.OnClickList
 
             }
         });
-        PackageInfo pInfo = null;
-        try {
-            pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        String verSion = pInfo.versionName;
-
-        tv_version.setText(verSion);
-        return rootView;
     }
 
 
@@ -106,6 +130,13 @@ public class MainPage3_Fragment extends BaseFragment implements View.OnClickList
             }
             //푸시알림
             case R.id.btn_setting_push: {
+                if (sc_push.isChecked()) {
+                    pref.put(true);
+                    Dlog.d("푸시활성화");
+                } else {
+                    pref.put(false);
+                    Dlog.d("푸시비활성화");
+                }
                 break;
             }
             //홈페이지

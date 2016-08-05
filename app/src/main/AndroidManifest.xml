@@ -21,6 +21,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- 전화걸려올경우 상대방 정보 확인 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
@@ -96,6 +100,12 @@
             android:protectionLevel="signature"
             android:syncable="true"/>
 
+        <service android:name=".base.call.CallingService"/>
+        <receiver android:name=".base.call.IncomingCallBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

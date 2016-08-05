@@ -2,9 +2,12 @@ package com.jwoos.android.sellbook.intro;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.Toast;
 
 import com.gun0912.tedpermission.PermissionListener;
@@ -15,9 +18,14 @@ import com.jwoos.android.sellbook.base.db.Preference;
 import com.jwoos.android.sellbook.main.MainActivity;
 import com.jwoos.android.sellbook.utils.Dlog;
 import com.jwoos.android.sellbook.utils.ObjectUtils;
+import com.jwoos.android.sellbook.utils.VersionChecker;
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.SimpleDialog;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -41,7 +49,60 @@ public class SplashActivity extends AppCompatActivity {
             is_login = false;
         }
 
-        PermissionSet();
+        chkVersion();
+    }
+
+    private void chkVersion() {
+        VersionChecker mv = new VersionChecker();
+        String store_version = null;
+        String device_version = null;
+
+        try {
+            store_version = mv.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            device_version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Dlog.d(store_version + "/" +device_version );
+        if (store_version.compareTo(device_version) > 0) {
+            Dlog.i("업데이트 필요");
+            showDialog();
+        } else {
+            Dlog.i("업데이트 불필요");
+            PermissionSet();
+        }
+    }
+
+    private void showDialog() {
+        Dialog.Builder builder = null;
+        builder = new SimpleDialog.Builder(R.style.SimpleDialogLight){
+            @Override
+            public void onPositiveActionClicked(DialogFragment fragment) {
+                final String appPackageName =  getPackageName();
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+                finish();
+                super.onPositiveActionClicked(fragment);
+            }
+        };
+
+        String colorText = "<font color='black'>최신버전 업데이트가 필요합니다<font>";
+        ((SimpleDialog.Builder)builder).message(Html.fromHtml(colorText))
+                .title("업데이트")
+                .positiveAction("확인");
+        DialogFragment fragment = DialogFragment.newInstance(builder);
+        fragment.setCancelable(false);
+        fragment.show(getSupportFragmentManager(), null);
     }
 
     private void PermissionSet() {

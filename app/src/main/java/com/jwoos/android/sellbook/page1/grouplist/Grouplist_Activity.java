@@ -45,6 +45,13 @@ public class Grouplist_Activity extends BaseActivity {
             }
         });
 
+        this.toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.openSearch();
+            }
+        });
+
         initialize_search();
 
 
