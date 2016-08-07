@@ -16,4 +16,4 @@
 
 스크린샷
 -------------------
-![alt tag](https://github.com/KimJaeWoos/SellBook-Project/blob/master/unnamed.png)
+![alt tag](https://github.com/KimJaeWoos/SellBook-Project/blob/master/screenshot.png)
