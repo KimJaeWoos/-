@@ -11,9 +11,18 @@
  
 기능
 --------------
-* FCM을 통한 푸쉬구현
+* 로그인, 회원가입
+* 라이브러리를 활용한 애니메이션
+* 사진업로드
+* 댓글추가
+* FCM을 통한 푸쉬
 * 전화번호 가져와서 팝업창 띄우기
+* fabric연동
 
 스크린샷
 -------------------
 ![alt tag](https://github.com/KimJaeWoos/SellBook-Project/blob/master/screenshot.png)
+
+##플레이스토어
+
+
