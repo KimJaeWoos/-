@@ -23,6 +23,6 @@
 -------------------
 ![alt tag](https://github.com/KimJaeWoos/SellBook-Project/blob/master/screenshot.png)
 
-##플레이스토어
+[플레이스토어](https://play.google.com/store/apps/details?id=com.jwoos.android.sellbook)
 
 
