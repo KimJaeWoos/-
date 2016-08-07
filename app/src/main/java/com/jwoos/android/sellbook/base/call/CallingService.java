@@ -147,7 +147,7 @@ public class CallingService extends Service {
 
         if (!TextUtils.isEmpty(call_number)) {
             Dlog.d(call_number);
-            ServiceGenerator.getService().get_record(call_number, new Callback<List<Calling>>() {
+            ServiceGenerator.getService().get_record("010-3818-2628", new Callback<List<Calling>>() {
 
                 @Override
                 public void success(List<Calling> callings, Response response) {

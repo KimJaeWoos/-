@@ -17,6 +17,8 @@ public class Book_Info {
     private String book_image1;
     private String book_image2;
     private String book_image3;
+    private String book_image4;
+    private String book_image5;
     private String book_register_time;
     private String sold_kind;
     private String book_name;
@@ -199,5 +201,22 @@ public class Book_Info {
     public void setKind_count(String kind_count) {
         this.kind_count = kind_count;
     }
+
+    public String getBook_image4() {
+        return book_image4;
+    }
+
+    public void setBook_image4(String book_image4) {
+        this.book_image4 = book_image4;
+    }
+
+    public String getBook_image5() {
+        return book_image5;
+    }
+
+    public void setBook_image5(String book_image5) {
+        this.book_image5 = book_image5;
+    }
+
 
 }

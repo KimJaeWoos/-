@@ -101,7 +101,7 @@ public class Myinfo_detail_Activity extends BaseActivity {
     private IndicatorViewPager indicatorViewPager;
     private MaterialDialog mMaterialDialog;
     private LayoutInflater inflate;
-    private String book_id, book_img1, book_img2, book_img3, sold_kind;
+    private String book_id, book_img1, book_img2, book_img3, book_img4, book_img5, sold_kind;
     private CommentAdapter ctAdapter;
     private int item_position;
     private InputMethodManager mgr;
@@ -139,6 +139,8 @@ public class Myinfo_detail_Activity extends BaseActivity {
                 book_img1 = bookInfos.get(0).getBook_image1();
                 book_img2 = bookInfos.get(0).getBook_image2();
                 book_img3 = bookInfos.get(0).getBook_image3();
+                book_img4 = bookInfos.get(0).getBook_image4();
+                book_img5 = bookInfos.get(0).getBook_image5();
                 sold_kind = bookInfos.get(0).getSold_kind();
                 state = bookInfos.get(0).getSold_kind();
                 setImage_url();
@@ -201,8 +203,12 @@ public class Myinfo_detail_Activity extends BaseActivity {
             images = new String[]{book_img1};
         } else if (book_img3.length() < 1) {
             images = new String[]{book_img1, book_img2};
-        } else {
+        } else if (book_img4.length() < 1) {
             images = new String[]{book_img1, book_img2, book_img3};
+        }  else if (book_img5.length() < 1) {
+            images = new String[]{book_img1, book_img2, book_img3, book_img4};
+        }  else {
+            images = new String[]{book_img1, book_img2, book_img3, book_img4, book_img5};
         }
     }
 
@@ -411,6 +417,8 @@ public class Myinfo_detail_Activity extends BaseActivity {
                     intent.putExtra("image1", book_img1);
                     intent.putExtra("image2", book_img2);
                     intent.putExtra("image3", book_img3);
+                    intent.putExtra("image4", book_img4);
+                    intent.putExtra("image5", book_img5);
                     startActivity(intent);
                 }
             });

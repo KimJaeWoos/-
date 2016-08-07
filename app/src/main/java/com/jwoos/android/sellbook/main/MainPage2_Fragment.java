@@ -91,7 +91,7 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
     @BindView(R.id.btn_send)
     com.rey.material.widget.Button btn1;
 
-    private String data_image1, data_image2, data_image3;
+    private String data_image1, data_image2, data_image3, data_image4, data_image5;
 
 
     @Nullable
@@ -115,9 +115,8 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
         switch (v.getId()) {
             case R.id.select1:
                 Config config = new Config();
-                config.setSelectionLimit(3);
-                config.setCameraHeight(R.dimen.app_camera_height);
-                config.setToolbarTitleRes(R.string.tedpicker_title);
+                config.setSelectionMin(3);
+                config.setSelectionLimit(10);
                 getImages(config);
                 break;
 
@@ -260,6 +259,9 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
         data_image1 = "";
         data_image2 = "";
         data_image3 = "";
+        data_image4 = "";
+        data_image5 = "";
+
 
         for (Uri uri : image_uris) {
 
@@ -290,8 +292,14 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
             else if (data_image2.equals("")) {
                 data_image2 = data_image;
             }
-            else {
+            else if (data_image3.equals("")) {
                 data_image3 = data_image;
+            }
+            else if (data_image4.equals("")) {
+                data_image4 = data_image;
+            }
+            else if (data_image5.equals("")) {
+                data_image5 = data_image;
             }
             uploadFile(file, data_image);
         }
@@ -300,7 +308,7 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
 
     private void input_data(){
         ServiceGenerator.getService().Create_board(data_name, data_group, data_price, data_board,
-                 data_image1, data_image2, data_image3, new Callback<Void>() {
+                 data_image1, data_image2, data_image3, data_image4, data_image5, new Callback<Void>() {
             @Override
             public void success(Void aVoid, Response response) {
                 data_flag = true;

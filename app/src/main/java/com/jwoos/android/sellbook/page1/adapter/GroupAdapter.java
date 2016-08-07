@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,8 @@ import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
 import com.jwoos.android.sellbook.base.retrofit.model.Book_Info;
 import com.jwoos.android.sellbook.page1.grouplist.Grouplist_detail_Activity;
 import com.jwoos.android.sellbook.page1.myinfo.Myinfo_detail_Activity;
+import com.jwoos.android.sellbook.utils.Dlog;
+import com.jwoos.android.sellbook.utils.ObjectUtils;
 import com.jwoos.android.sellbook.utils.TimeFomat;
 import com.jwoos.android.sellbook.widget.MLRoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -114,14 +117,14 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         @BindView(R.id.comment)
         ImageView iv_comment;
         @Nullable
-        @BindView(R.id.card_click)
-        TextView card_click;
-        @Nullable
         @BindView(R.id.favorite_cnt)
         TextView tv_favorite_cnt;
         @Nullable
         @BindView(R.id.comment_cnt)
         TextView tv_comment_cnt;
+        @Nullable
+        @BindView(R.id.maxLine_text)
+        TextView max_text;
 
         private String[] image;
 
@@ -148,11 +151,22 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             tv_time.setText(time);
 
             tv_bookname.setText("책 제목 : " + bookInfos.get(position).getBook_name());
-            //tv_bookcontent.setText(bookInfos.get(position).getBook_content());
+            tv_bookcontent.setText(bookInfos.get(position).getBook_content());
             tv_bookprice.setText(bookInfos.get(position).getBook_price());
             tv_comment_cnt.setText(bookInfos.get(position).getComment_count());
             tv_favorite_cnt.setText(bookInfos.get(position).getFavorite_count());
 
+            //내용이 1줄이상일 경우
+            tv_bookcontent.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (tv_bookcontent.getLineCount() > 1 ) {
+                        max_text.setVisibility(View.VISIBLE);
+                    } else {
+                        max_text.setVisibility(View.GONE);
+                    }
+                }
+            });
 
 
             //판매완료 확인
@@ -161,7 +175,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             } else {
                 tv_soldout.setVisibility(View.INVISIBLE);
             }
-            image = new String[]{bookInfos.get(position).getBook_image1(), bookInfos.get(position).getBook_image2(), bookInfos.get(position).getBook_image3()};
+
+            //이미지 셋팅
+            imageSetting();
+            image = new String[] {bookInfos.get(position).getBook_image1(), bookInfos.get(position).getBook_image2(), bookInfos.get(position).getBook_image3(),
+                                    bookInfos.get(position).getBook_image4(), bookInfos.get(position).getBook_image5()};
             showMedia(image);
 
             //자신이 올린 게시물은 즐켜찾기 버튼 비활성화
@@ -180,9 +198,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             detail_click(position, bookInfos.get(position).getUser_chk());
         }
 
+        private void imageSetting() {
+        }
+
         private void detail_click(final int position, final String flag) {
-            assert card_click != null;
-            card_click.setOnClickListener(new View.OnClickListener() {
+            assert cardView != null;
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = null;
@@ -305,18 +326,20 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
             int htpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, itemView.getResources().getDisplayMetrics());
 
             for (String uri : image) {
-                View imageHolder = LayoutInflater.from(itemView.getContext()).inflate(R.layout.page1_image_item, null);
-                ImageView thumbnail = (ImageView) imageHolder.findViewById(R.id.media_image);
+                if (!ObjectUtils.isEmpty(uri.toString())) {
+                    View imageHolder = LayoutInflater.from(itemView.getContext()).inflate(R.layout.page1_image_item, null);
+                    ImageView thumbnail = (ImageView) imageHolder.findViewById(R.id.media_image);
 
-                int book_rotate = 0;
-                if (!uri.isEmpty()) book_rotate = Character.getNumericValue(uri.charAt(9));
+                    int book_rotate = 0;
+                    if (!uri.isEmpty()) book_rotate = Character.getNumericValue(uri.charAt(9));
 
-                Picasso.with(mContext)
-                        .load(base_image_url_uploads + uri)
-                        .rotate(orientation(book_rotate))
-                        .into(thumbnail);
-                mSelectedImagesContainer.addView(imageHolder);
-                thumbnail.setLayoutParams(new FrameLayout.LayoutParams(wdpx, htpx));
+                    Picasso.with(mContext)
+                            .load(base_image_url_uploads + uri)
+                            .rotate(orientation(book_rotate))
+                            .into(thumbnail);
+                    mSelectedImagesContainer.addView(imageHolder);
+                    thumbnail.setLayoutParams(new FrameLayout.LayoutParams(wdpx, htpx));
+                }
             }
         }
 

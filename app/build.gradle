@@ -20,8 +20,8 @@ android {
         applicationId "com.jwoos.android.sellbook"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 4
-        versionName "1.0.2"
+        versionCode 5
+        versionName "1.0.3"
     }
     buildTypes {
         release {
@@ -33,7 +33,7 @@ android {
                     output->
                         def file = output.outputFile
                         output.outputFile = new File(file.parent,
-                                file.name.replace("app", "appname." + defaultConfig.versionName))
+                                file.name.replace("app", "SellBook." + defaultConfig.versionName))
                 }
             }
 

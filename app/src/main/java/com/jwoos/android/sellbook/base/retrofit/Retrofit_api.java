@@ -71,6 +71,8 @@ public interface Retrofit_api {
                       @Field("book_image1") String book_image1,
                       @Field("book_image2") String book_image2,
                       @Field("book_image3") String book_image3,
+                      @Field("book_image4") String book_image4,
+                      @Field("book_image5") String book_image5,
                       Callback<Void> response);
 
     @GET("/api/my_info.php")

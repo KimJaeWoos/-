@@ -225,8 +225,12 @@ public class Grouplist_detail_Activity extends BaseActivity {
             images = new String[]{items.get(0).getBook_image1()};
         } else if (items.get(0).getBook_image3().length() < 1) {
             images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2()};
-        } else {
+        } else if (items.get(0).getBook_image4().length() < 1) {
             images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2(), items.get(0).getBook_image3()};
+        } else if (items.get(0).getBook_image5().length() < 1) {
+            images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2(), items.get(0).getBook_image3(), items.get(0).getBook_image4()};
+        } else {
+            images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2(), items.get(0).getBook_image3(), items.get(0).getBook_image4(), items.get(0).getBook_image5()};
         }
     }
 
@@ -428,6 +432,8 @@ public class Grouplist_detail_Activity extends BaseActivity {
                     intent.putExtra("image1", items.get(0).getBook_image1());
                     intent.putExtra("image2", items.get(0).getBook_image2());
                     intent.putExtra("image3", items.get(0).getBook_image3());
+                    intent.putExtra("image4", items.get(0).getBook_image4());
+                    intent.putExtra("image5", items.get(0).getBook_image5());
                     startActivity(intent);
                 }
             });
