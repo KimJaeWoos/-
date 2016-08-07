@@ -14,10 +14,6 @@
 * FCM을 통한 푸쉬구현
 * 전화번호 가져와서 팝업창 띄우기
 
-
-
-
-
-사진
+스크린샷
 -------------------
-
+![alt tag](https://github.com/KimJaeWoos/SellBook-Project/blob/master/unnamed.png)
