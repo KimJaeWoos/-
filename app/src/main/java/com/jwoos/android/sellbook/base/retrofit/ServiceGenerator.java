@@ -15,7 +15,7 @@ import retrofit.client.OkClient;
  */
 public class ServiceGenerator {
 
-    private static final String API_BASE_URL = "";
+    private static final String API_BASE_URL = "http://fack14.cafe24.com/SellBook";
     private static final long tiempoMaximoRespuestaSegundos = 600;
     private static final long tiempoMaximoLecturaSegundos = 1000;
     private static OkHttpClient clienteOkHttp = new OkHttpClient();
