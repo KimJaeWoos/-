@@ -9,12 +9,69 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/select1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_stand"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_aspect_ratio" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/page2_margin_left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="바코드 스캔하기"
+                    android:textColor="@color/btn_text_color"
+                    android:textSize="@dimen/menu_text_size_bold"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="책뒷면의 ISBN 바코드를 스캔해주세요"
+                    android:textColor="@color/md_grey_700"
+                    android:textSize="@dimen/menu_text_size" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/md_grey_600" />
+
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
+
+
             <LinearLayout
-                android:id="@+id/select1"
+                android:id="@+id/select2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_btn_stand"
@@ -26,13 +83,14 @@
                     android:layout_height="50dp">
 
                     <ImageView
-                        android:id="@+id/iv1"
+                        android:id="@+id/iv2"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
                         android:background="@drawable/ic_action_camera" />
 
                 </RelativeLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -53,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="중고책 사진을 골라주세요"
+                        android:text="중고책 사진을 추가해주세요"
                         android:textColor="@color/md_grey_700"
                         android:textSize="@dimen/menu_text_size" />
 
@@ -96,7 +154,7 @@
 
 
         <LinearLayout
-            android:id="@+id/select0"
+            android:id="@+id/select3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_btn_stand"
@@ -108,7 +166,7 @@
                 android:layout_height="50dp">
 
                 <ImageView
-                    android:id="@+id/iv0"
+                    android:id="@+id/iv3"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:layout_centerInParent="true"
@@ -126,136 +184,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="책 이름"
+                    android:text="책 등급"
                     android:textColor="@color/btn_text_color"
                     android:textSize="@dimen/menu_text_size_bold"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="책 이름을 정확히 적어주세요"
-                    android:textColor="@color/md_grey_700"
-                    android:textSize="@dimen/menu_text_size" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/md_grey_600" />
-
-
-        <LinearLayout
-            android:id="@+id/select2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_btn_stand"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <RelativeLayout
-                android:layout_width="60dp"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:id="@+id/iv2"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/ic_action_book" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/page2_margin_left"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="판매책분류"
-                    android:textColor="@color/btn_text_color"
-                    android:textSize="@dimen/menu_text_size_bold"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="어떤 종류의 책을 판매하시나요?"
-                    android:textColor="@color/md_grey_700"
-                    android:textSize="@dimen/menu_text_size" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/md_grey_600" />
-
-
-        <LinearLayout
-            android:id="@+id/select3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_btn_stand"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <RelativeLayout
-                android:layout_width="60dp"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:id="@+id/iv3"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/ic_action_edit" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/page2_margin_left"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="판매가격"
-                    android:textColor="@color/btn_text_color"
-                    android:textSize="@dimen/menu_text_size_bold"
-                    android:textStyle="bold" />
-
-                <com.jwoos.android.sellbook.widget.RialTextView
                     android:id="@+id/tv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="얼마에 판매하실 생각이세요?"
+                    android:text="책상태 등급을 매겨주세요"
                     android:textColor="@color/md_grey_700"
                     android:textSize="@dimen/menu_text_size" />
 
             </LinearLayout>
 
         </LinearLayout>
-
 
         <TextView
             android:layout_width="match_parent"
@@ -280,6 +225,62 @@
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:layout_centerInParent="true"
+                    android:background="@drawable/ic_action_edit" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/page2_margin_left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="판매가격"
+                    android:textColor="@color/btn_text_color"
+                    android:textSize="@dimen/menu_text_size_bold"
+                    android:textStyle="bold" />
+
+                <com.jwoos.android.sellbook.widget.RialTextView
+                    android:id="@+id/tv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="얼마에 판매하실 생각이세요?"
+                    android:textColor="@color/md_grey_700"
+                    android:textSize="@dimen/menu_text_size" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/md_grey_600" />
+
+
+        <LinearLayout
+            android:id="@+id/select5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_stand"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/iv5"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
                     android:background="@drawable/ic_action_news" />
 
             </RelativeLayout>
@@ -292,7 +293,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="판매글"
@@ -301,7 +301,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv4"
+                    android:id="@+id/tv5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

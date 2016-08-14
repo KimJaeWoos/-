@@ -152,12 +152,12 @@
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-hdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png",
-        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
-    },
-    {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png",
+        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\abc_ic_star_half_black_36dp.png",

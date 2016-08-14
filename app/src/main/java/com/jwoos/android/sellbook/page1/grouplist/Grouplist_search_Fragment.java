@@ -42,24 +42,7 @@ public class Grouplist_search_Fragment extends BaseFragment {
     }
 
 
-    private RecyclerView.LayoutManager mLayoutManager;
-    private GroupAdapter mAdapter;
 
-    private static final int MAX_ITEMS_PER_REQUEST = 20;
-    private static final int SIMULATED_LOADING_TIME_IN_MS = 1500;
-    private List<Book_Info> items;
-    private boolean first_count;
-    private int page;
-    private int start_book_id;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.mySwipeRefreshLayout)
-    SwipeRefreshLayout mySwipeRefreshLayout;
-    @BindView(R.id.search_empty)
-    TextView tv_empty;
-
-    private String search_keyword, search_category;
 
 
     @Nullable
@@ -68,151 +51,17 @@ public class Grouplist_search_Fragment extends BaseFragment {
         View rootView = inflater.inflate(R.layout.fragment_grouplist, container, false);
         ButterKnife.bind(this, rootView);
 
-        search_category = getArguments().getString("category");
-        search_keyword = getArguments().getString("keyword");
-        Log.d("TAG",search_category + "/" + search_keyword);
 
-        initialize();
-        getData(0, MAX_ITEMS_PER_REQUEST);
-        SwipeRefresh();
 
 
         //검색 숨기기, 타이틀바셋팅
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(search_keyword);
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(search_keyword);
 
 
         return rootView;
     }
 
-    private void SwipeRefresh() {
-        mySwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
-        mySwipeRefreshLayout.setColorSchemeResources(
-                android.R.color.black);
-        mySwipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        new GetDataTask().execute();
-                        // 刷新动画开始后回调到此方法
-                    }
-                }
 
-        );
-    }
-
-
-    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
-
-        @Override
-        protected String[] doInBackground(Void... params) {
-            // Simulates a background job.
-            try {
-                Thread.sleep(2000);
-                page = 0;
-                first_count = true;
-
-            } catch (InterruptedException e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String[] result) {
-            mySwipeRefreshLayout.setRefreshing(false);
-            mRecyclerView.removeAllViews();
-            getData(0, MAX_ITEMS_PER_REQUEST);
-            super.onPostExecute(result);
-        }
-    }
-
-
-    public void initialize() {
-        page = 0;
-        mRecyclerView.removeAllViews();
-        first_count = true;
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-    }
-
-
-    private InfiniteScrollListener createInfiniteScrollListener() {
-        return new InfiniteScrollListener(MAX_ITEMS_PER_REQUEST, (LinearLayoutManager) mLayoutManager) {
-            @Override
-            public void onScrolledToEnd(final int firstVisibleItemPosition) {
-
-                int start = ++page * MAX_ITEMS_PER_REQUEST; //(page x 30 )
-                //Log.d("스크롤링", "start > item.size() " + start + ">" + items.size());
-                final boolean allItemsLoaded = start > items.size();
-                if (allItemsLoaded) {
-                    //더 이상 데이터가 없음
-                } else {
-                    int start_id = start_book_id;
-                    //Log.d("TAG", "스타트아이디" + start_id);
-                    //int end = start + MAX_ITEMS_PER_REQUEST ;
-                    getData(start_id, MAX_ITEMS_PER_REQUEST);
-                    refreshView(mRecyclerView, new GroupAdapter(getActivity(), items), firstVisibleItemPosition);
-                }
-            }
-        };
-    }
-
-    private void getData(int item_start, int item_end) {
-
-        ServiceGenerator.getService().getBook_search(item_start, item_end, search_keyword, search_category, new Callback<List<Book_Info>>() {
-
-            @Override
-            public void success(final List<Book_Info> bookInfos, Response response) {
-                if (bookInfos.get(0).getEmpty_chk().equals("true")) {
-                    if (first_count == true) {
-                        items = new ArrayList<>();
-                        mAdapter = new GroupAdapter(getActivity(), bookInfos);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mRecyclerView.addOnScrollListener(createInfiniteScrollListener());
-                        first_count = false;
-
-                        mRecyclerView.addOnItemTouchListener(
-                                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-
-                                    @Override
-                                    public void onItemClick(View view, int position) {
-                                        Intent intent = new Intent(getActivity(),Grouplist_detail_Activity.class);
-                                        intent.putExtra("book_id", bookInfos.get(position).getBook_id());
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intent);
-                                        getActivity().overridePendingTransition(0,0);
-                                    }
-                                }));
-                    }
-
-                    //불러들인 데이터의 끝지점 book_id를 저장 이 번호 다음부터 데이터 요청
-
-                    if (bookInfos.get(0).getEmpty_chk().equals("true")) {
-                        start_book_id = Integer.parseInt(bookInfos.get(bookInfos.size() - 1).getBook_id());
-                        for (int i = 0; i < bookInfos.size(); i++) {
-                            items.add(bookInfos.get(i));
-                        }
-                        //마지막 리스폰서 개수와 MAX_ITEMS_PER_REQUEST 다를경우
-                        if (bookInfos.size() != MAX_ITEMS_PER_REQUEST) {
-                            page = bookInfos.size();
-                        }
-                    } else {
-                        //마지막 리스폰서 개수와 MAX_ITEMS_PER_REQUEST 같을경우 다를경우보다 한번더 요청하고 Empty_chk를 체크하여 끝을 인지한다
-                        page = items.size();
-                    }
-
-                } else {
-                    tv_empty.setVisibility(View.VISIBLE);
-                    tv_empty.setText("'"+search_keyword+"'"+"에 대한 검색결과가 없습니다.");
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("TAG", error.getMessage());
-            }
-        });
-    }
 
     //검색메뉴 숨기기
     @Override

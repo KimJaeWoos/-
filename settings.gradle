@@ -1,1 +1,1 @@
-include ':app', 'Search'
+include ':app', 'Search', ':materialbarcodescanner'

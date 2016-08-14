@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Search/Search.iml" filepath="$PROJECT_DIR$/Search/Search.iml" />
       <module fileurl="file://$PROJECT_DIR$/SellBook-Project.iml" filepath="$PROJECT_DIR$/SellBook-Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialbarcodescanner/materialbarcodescanner.iml" filepath="$PROJECT_DIR$/materialbarcodescanner/materialbarcodescanner.iml" />
     </modules>
   </component>
 </project>

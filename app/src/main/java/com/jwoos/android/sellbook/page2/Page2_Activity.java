@@ -35,74 +35,7 @@ public class Page2_Activity extends BaseActivity {
             case 4:
                 input_board(input_data);
                 break;
-            case 5:
-                input_phone();
-                break;
-            case 0:
-                input_name(input_data);
-                break;
         }
-
-    }
-    private void input_name(String input_data){
-        setContentView(R.layout.activity_input_name);
-        setToolbar("책 제목 정하기");
-
-        final EditText tv = (EditText)findViewById(R.id.input_phone);
-        final ImageButton btn2 = (ImageButton)findViewById(R.id.setting_check);
-        final Button btn3 = (Button)findViewById(R.id.setting_check2);
-
-        tv.setText(input_data);
-        tv.setSelection(tv.length());
-
-        assert btn2 != null; //설정값들이 일치하는지 검사 ??
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String name = tv.getText().toString();
-
-                if (ObjectUtils.isEmpty(name)){
-                    showToast("제목을 정확히 입력해주세요 :)");
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .playOn(tv);
-
-                }else {
-                    Bundle extra = new Bundle();
-                    Intent intent = new Intent();
-                    extra.putString("name",name);
-                    intent.putExtras(extra);
-                    setResult(Activity.RESULT_OK,intent);
-                    finish();
-                }
-
-            }
-        });
-
-        assert btn3 != null;
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String name = tv.getText().toString();
-
-                if (ObjectUtils.isEmpty(name)){
-                    showToast("제목을 정확히 입력해주세요 :)");
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .playOn(tv);
-                }else {
-                    Bundle extra = new Bundle();
-                    Intent intent = new Intent();
-                    extra.putString("name",name);
-                    intent.putExtras(extra);
-                    setResult(Activity.RESULT_OK,intent);
-                    finish();
-                }
-
-            }
-        });
 
     }
 

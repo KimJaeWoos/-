@@ -24,13 +24,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
+import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
+import com.google.android.gms.vision.barcode.Barcode;
 import com.gun0912.tedpicker.Config;
 import com.gun0912.tedpicker.ImagePickerActivity;
 import com.jwoos.android.sellbook.R;
 import com.jwoos.android.sellbook.base.BaseFragment;
 import com.jwoos.android.sellbook.base.event_bus.ActivityResultEvent;
 import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
+import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator2;
+import com.jwoos.android.sellbook.base.retrofit.model.NaverInfo;
 import com.jwoos.android.sellbook.page2.Page2_Activity;
+import com.jwoos.android.sellbook.utils.Dlog;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
@@ -43,20 +49,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.coreorb.selectiondialogs.data.SelectableColor;
+import pl.coreorb.selectiondialogs.data.SelectableIcon;
 import pl.coreorb.selectiondialogs.dialogs.ColorSelectDialog;
+import pl.coreorb.selectiondialogs.dialogs.IconSelectDialog;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 
 
-public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialog.OnColorSelectedListener {
+public class MainPage2_Fragment extends BaseFragment implements IconSelectDialog.OnIconSelectedListener {
     public MainPage2_Fragment() {
     }
 
@@ -66,6 +73,7 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
     private static final int INTENT_REQUEST_PAGE2_ACTIVITY_PRICE = 1002;
     private static final int INTENT_REQUEST_PAGE2_ACTIVITY_BOARD = 1003;
     private static final int INTENT_REQUEST_PAGE2_ACTIVITY_NAME = 1005;
+    private static final int INTENT_REQUEST_PAGE2_ACTIVITY_BARCODE = 12;
 
     private static final String TAG = "TedPicker";
     ArrayList<Uri> image_uris = new ArrayList<Uri>();
@@ -80,14 +88,14 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
 
     private int retrofit_conunt;
 
-    @BindView(R.id.iv0) ImageView iv0;
-    @BindView(R.id.iv2) ImageView iv2;
+    @BindView(R.id.iv1) ImageView iv1;
     @BindView(R.id.iv3) ImageView iv3;
     @BindView(R.id.iv4) ImageView iv4;
-    @BindView(R.id.tv0) TextView tv0;
-    @BindView(R.id.tv2) TextView tv2;
+    @BindView(R.id.iv5) ImageView iv5;
+    @BindView(R.id.tv1) TextView tv1;
     @BindView(R.id.tv3) TextView tv3;
     @BindView(R.id.tv4) TextView tv4;
+    @BindView(R.id.tv5) TextView tv5;
     @BindView(R.id.btn_send)
     com.rey.material.widget.Button btn1;
 
@@ -108,23 +116,31 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
     }
 
 
-    @OnClick({R.id.select1,R.id.select2,R.id.select3,R.id.select4,R.id.select0,R.id.btn_send})
+    @OnClick({R.id.select1,R.id.select2,R.id.select3,R.id.select4,R.id.select5,R.id.btn_send})
     public void select(View v) {
 
         Intent intent = null;
         switch (v.getId()) {
+            //바코드스캔
             case R.id.select1:
+                startScan();
+                break;
+
+            //사진추가
+            case R.id.select2:
                 Config config = new Config();
                 config.setSelectionMin(3);
                 config.setSelectionLimit(10);
                 getImages(config);
                 break;
 
-            case R.id.select2:
-                showColorSelectDialog();
+            //책 등급 정하기
+            case R.id.select3:
+                showIconSelectDialog();
                 break;
 
-            case R.id.select3:
+            //책 가격
+            case R.id.select4:
                 intent = new Intent(getActivity(), Page2_Activity.class);
                 intent.putExtra("num", 3);
                 intent.putExtra("input_data", data_price);
@@ -132,20 +148,13 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
                 getActivity().startActivityForResult(intent, INTENT_REQUEST_PAGE2_ACTIVITY_PRICE);
                 break;
 
-            case R.id.select4:
+            //판매글 내용
+            case R.id.select5:
                 intent = new Intent(getActivity(), Page2_Activity.class);
                 intent.putExtra("num", 4);
                 intent.putExtra("input_data", data_board);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 getActivity().startActivityForResult(intent, INTENT_REQUEST_PAGE2_ACTIVITY_BOARD);
-                break;
-
-            case R.id.select0:
-                intent = new Intent(getActivity(), Page2_Activity.class);
-                intent.putExtra("num", 0);
-                intent.putExtra("input_data", data_name);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                getActivity().startActivityForResult(intent, INTENT_REQUEST_PAGE2_ACTIVITY_NAME);
                 break;
 
             case R.id.btn_send:
@@ -352,35 +361,22 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
                     select1.setVisibility(View.INVISIBLE);
                     data_image = image_uris.toString();
 
-                }else {
+                } else {
                     mSelectedImagesContainer.setVisibility(View.GONE);
                     select1.setVisibility(View.VISIBLE);
                 }
-
             }
-
             if(requestCode == INTENT_REQUEST_PAGE2_ACTIVITY_PRICE){
                 String price = intent.getStringExtra("price");
                 data_price = price;
-                iv3.setBackgroundResource(R.drawable.ic_action_done_red);
-                tv3.setText(price);
-            }
-            else if(requestCode == INTENT_REQUEST_PAGE2_ACTIVITY_CATEGORY){
-
-            }
-            else if(requestCode == INTENT_REQUEST_PAGE2_ACTIVITY_BOARD){
+                iv4.setBackgroundResource(R.drawable.ic_action_done_red);
+                tv4.setText(price);
+            } else if(requestCode == INTENT_REQUEST_PAGE2_ACTIVITY_BOARD) {
 
                 String board = intent.getStringExtra("board");
                 data_board = board;
-                iv4.setBackgroundResource(R.drawable.ic_action_done_red);
-                tv4.setText(board);
-            }
-            else if(requestCode == INTENT_REQUEST_PAGE2_ACTIVITY_NAME){
-                String name = intent.getStringExtra("name");
-                data_name = name;
-
-                iv0.setBackgroundResource(R.drawable.ic_action_done_red);
-                tv0.setText(name);
+                iv5.setBackgroundResource(R.drawable.ic_action_done_red);
+                tv5.setText(board);
             }
         }
         check_input();
@@ -432,25 +428,26 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
     }
 
 
-    private void showColorSelectDialog() {
-        new ColorSelectDialog.Builder(getContext())
-                .setColors(R.array.ids,
-                        R.array.names,
-                        R.array.colors)
-                .setTitle("카테고리")
-                .setSortColorsByName(true)
-                .setOnColorSelectedListener(this)
-                .build().show(getFragmentManager(), "TAG_SELECT_COLOR_DIALOG");
+
+    public void showIconSelectDialog() {
+        new IconSelectDialog.Builder(getContext())
+                .setIcons(setIcons())
+                .setTitle("책등급")
+                .setSortIconsByName(false)
+                .setOnIconSelectedListener(this)
+                .build().show(getFragmentManager(), "");
     }
 
-    @Override
-    public void onColorSelected(SelectableColor selectedItem) {
-        String id = selectedItem.getName();
-        data_group = id;
-        tv2.setText(data_group);
-        iv2.setBackgroundResource(R.drawable.ic_action_done_red);
-        check_input();
+    private static ArrayList<SelectableIcon> setIcons() {
+        ArrayList<SelectableIcon> selectionDialogsColors = new ArrayList<>();
+        selectionDialogsColors.add(new SelectableIcon("A+", "뜯고 사용하지 않음, 필기가 전혀없음", R.drawable.garde_aplus));
+        selectionDialogsColors.add(new SelectableIcon("A", "약간의 사용감 존재, 필기가 약간 있음", R.drawable.garde_a));
+        selectionDialogsColors.add(new SelectableIcon("B", "사용흔적이 다수 있고, 대부분 페이지에 필기가 있음", R.drawable.garde_b));
+        selectionDialogsColors.add(new SelectableIcon("C", "상태가 많이 안좋지만 보는데는 지장이 없음", R.drawable.garde_c));
+        return selectionDialogsColors;
     }
+
+
 
     //파일 업로드
     private void uploadFile(File file, String file_name) {
@@ -469,5 +466,50 @@ public class MainPage2_Fragment extends BaseFragment implements ColorSelectDialo
                 retrofit_conunt++;
             }
         });
+    }
+
+    private void startScan() {
+        /**
+         * Build a new MaterialBarcodeScanner
+         */
+        final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
+                .withActivity(getActivity())
+                .withEnableAutoFocus(true)
+                .withBleepEnabled(true)
+                .withBackfacingCamera()
+                .withCenterTracker()
+                .withText("스캔중...")
+                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
+                    @Override
+                    public void onResult(Barcode barcode) {
+                        //barcodeResult = barcode;
+                        //result.setText(barcode.rawValue);
+                        Dlog.d("스캔결과값 : " +barcode.rawValue);
+                        iv1.setBackgroundResource(R.drawable.ic_action_done_red);
+                        ServiceGenerator2.getService().getIsbn(barcode.rawValue, barcode.rawValue, new Callback<NaverInfo>() {
+                            @Override
+                            public void success(NaverInfo naverInfo, Response response) {
+                                Dlog.d(naverInfo.getTitle());
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Dlog.e(error.getMessage());
+
+                            }
+                        });
+                    }
+                })
+                .build();
+        materialBarcodeScanner.startScan();
+    }
+
+    @Override
+    public void onIconSelected(SelectableIcon selectedItem) {
+        String id = selectedItem.getId();
+        data_group = id;
+        tv3.setText(data_group);
+        iv3.setBackgroundResource(R.drawable.ic_action_done_red);
+        check_input();
     }
 }

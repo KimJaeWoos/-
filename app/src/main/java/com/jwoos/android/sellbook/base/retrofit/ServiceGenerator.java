@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
+import retrofit.converter.SimpleXMLConverter;
 
 /**
  * Created by renegens on 16/02/16.
@@ -24,6 +25,7 @@ public class ServiceGenerator {
     private static RestAdapter.Builder builder = new RestAdapter.Builder()
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .setEndpoint(API_BASE_URL)
+            .setConverter(new SimpleXMLConverter())
             .setClient(new OkClient(clienteOkHttp));
 
 
@@ -34,6 +36,8 @@ public class ServiceGenerator {
 
                 request.addHeader("Authorization", "auth-value");
                 request.addHeader("Accept", "application/json");
+                request.addHeader("X-Naver-Client-Id","S3Uth6DNCQTj6psKgg8I");
+                request.addHeader("X-Naver-Client-Secret","GyFh_DlXGW");
             }
         });
         clienteOkHttp.interceptors().add(new AddCookiesInterceptor());

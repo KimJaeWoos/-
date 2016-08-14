@@ -6,6 +6,7 @@ import com.jwoos.android.sellbook.base.retrofit.model.Calling;
 import com.jwoos.android.sellbook.base.retrofit.model.Comment;
 import com.jwoos.android.sellbook.base.retrofit.model.Favorites;
 import com.jwoos.android.sellbook.base.retrofit.model.Login;
+import com.jwoos.android.sellbook.base.retrofit.model.NaverInfo;
 import com.jwoos.android.sellbook.base.retrofit.model.Notice;
 
 import java.util.List;
@@ -177,4 +178,8 @@ public interface Retrofit_api {
     void get_record(@Field("user_phone") String phoneNum,
                     Callback<List<Calling>> response);
 
+    @GET("/")
+    void getIsbn(@Query("d_isbn") String d_isbn,
+                 @Query("query") String query,
+                 Callback<NaverInfo> response);
 }

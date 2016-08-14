@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer-array name="colors">
-        <item>@color/colorPrimaryDark</item>
-        <item>@color/colorPrimaryDark</item>
-        <item>@color/colorPrimaryDark</item>
-       <!-- <item>@color/selectiondialogs_materialdesign500_deep_purple</item>
-        <item>@color/selectiondialogs_materialdesign500_indigo</item>
-        <item>@color/selectiondialogs_materialdesign500_blue</item>
-        <item>@color/selectiondialogs_materialdesign500_light_blue</item>
-        <item>@color/selectiondialogs_materialdesign500_cyan</item>
-        <item>@color/selectiondialogs_materialdesign500_teal</item>
-        <item>@color/selectiondialogs_materialdesign500_green</item>
-        <item>@color/selectiondialogs_materialdesign500_light_green</item>
-        <item>@color/selectiondialogs_materialdesign500_lime</item>
-        <item>@color/selectiondialogs_materialdesign500_yellow</item>-->
+        <item>@color/colorAccent</item>
+        <item>@color/colorAccent</item>
+        <item>@color/colorAccent</item>
+        <item>@color/colorAccent</item>
+
     </integer-array>
 
     <string-array name="names">
-        <item>전공서적</item>
-        <item>교양서적</item>
-        <item>기타</item>
+        <item>A+ 뜯고 사용하지않음, 필기가 전혀 없음</item>
+        <item>A 약간의 사용감 존재, 필기가 약간 있음</item>
+        <item>B 사용흔적이 다수 있고, 대부분 페이지에 필기가 있음</item>
+        <item>C 상태가 많이 안좋지만 보는데는 지장이 없음</item>
 
     </string-array>
 
     <string-array name="ids">
-        <item>2.red</item>
-        <item>3.pink</item>
-        <item>1.purple</item>
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+        <item>d</item>
     </string-array>
 
     <integer-array name="google_colors">

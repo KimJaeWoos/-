@@ -4,12 +4,12 @@
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\src\\main\\res\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
-        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_subheader.xml",
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_menu_item_layout.xml"
     },
     {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
@@ -92,12 +92,12 @@
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
     },
     {
-        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
-    },
-    {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
     {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",

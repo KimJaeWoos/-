@@ -1,37 +1,36 @@
-<RelativeLayout
-    android:background="@color/btn_background_color"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/search_main"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:background="@drawable/iv_book" />
         <TextView
-            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/search_main"
+            android:id="@+id/search_ment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:padding="20dp"
-            android:id="@+id/search_empty"
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:lineSpacingExtra="10dip"
+            android:text="구매를 원하는 책 제목, 저자, 또는 ISBN번호를 입력해주세요"
+            android:textSize="20dp" />
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/mySwipeRefreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal" />
-        </android.support.v4.widget.SwipeRefreshLayout>
+    </RelativeLayout>
 
-    </FrameLayout>
 
 </RelativeLayout>
