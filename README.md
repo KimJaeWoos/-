@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-﻿# SellBook-Project
+
 중고책 커뮤니티
-테스트
 =======
 
 # 셀북 (대구대학교)
@@ -32,5 +30,3 @@
 ----------------------
 [설치하기](https://play.google.com/store/apps/details?id=com.jwoos.android.sellbook)
 
-
->>>>>>> beba353125649b4f7116951ab87cace1ede5c351
