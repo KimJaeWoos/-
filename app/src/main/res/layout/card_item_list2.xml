@@ -1,184 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_marginBottom="2px"
+    android:background="@color/white"
+    app:cardElevation="0dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/book_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="책제목입니다.책제목입니다.책제목입니다.책제목입니다.책제목입니다."
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <LinearLayout
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/item_click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/book_title"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/book_cover"
-                android:layout_width="70dp"
-                android:layout_height="100dp"
-                android:background="@drawable/book" />
+            app:mrl_rippleAlpha="0.2"
+            app:mrl_rippleColor="@color/ripple_color"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginLeft="5dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/book_publisher"
+                    android:id="@+id/book_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="이석호 | 정익사"
-                    android:textSize="14dp" />
-
-
-                <LinearLayout
-                    android:id="@+id/book_title_container"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/book_publisher"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="3dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/book_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="출판연도"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/book_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="카테고리"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/book_state"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="책상태"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/book_seller"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="판매자"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/book_publisher"
-                    android:layout_marginTop="3dp"
-                    android:layout_toRightOf="@+id/book_title_container"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/book_date_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2014"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/book_category_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="전공책"
-                        android:textColor="@color/red"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/book_state_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="A"
-                        android:textColor="@color/red"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/book_seller_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="맛간동자"
-                        android:textSize="13dp" />
-
-                </LinearLayout>
+                    android:singleLine="true"
+                    android:text="책제목입니다.책제목입니다.책제목입니다.책제목입니다.책제목입니다."
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
                 <RelativeLayout
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/book_title"
+                    android:layout_marginTop="2dp">
 
-                    <com.jwoos.android.sellbook.widget.RialTextView
-                        android:layout_alignParentRight="true"
-                        android:id="@+id/book_price_before"
-                        android:text="22000"
-                        android:textSize="14dp"
+                    <ImageView
+                        android:id="@+id/book_cover"
+                        android:layout_width="70dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/book" />
+
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/book_cover">
 
-                    <com.jwoos.android.sellbook.widget.RialTextView
-                        android:id="@+id/book_price_after"
-                        android:layout_marginTop="3dp"
-                        android:layout_below="@+id/book_price_before"
-                        android:text="15000"
-                        android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_marginTop="3dp"
-                        android:layout_below="@+id/book_price_after"
-                        android:id="@+id/book_discount"
-                        android:textSize="15dp"
-                        android:text="[54%]"
-                        android:textColor="@color/red"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/book_publisher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:singleLine="true"
+                            android:text="이석호 | 정익사"
+                            android:textSize="14dp" />
 
 
+                        <LinearLayout
+                            android:id="@+id/book_title_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/book_publisher"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="3dp"
+                            android:orientation="vertical">
 
+                            <TextView
+                                android:id="@+id/book_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="출판연도"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/book_category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="카테고리"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/book_state"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="책상태"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/book_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="판매자"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/book_publisher"
+                            android:layout_marginTop="3dp"
+                            android:layout_toRightOf="@+id/book_title_container"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/book_date_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2014"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/book_category_content"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:singleLine="true"
+                                android:ellipsize="marquee"
+                                android:text="전공책"
+                                android:textColor="@color/red"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/book_state_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:singleLine="true"
+                                android:text="A"
+                                android:textColor="@color/red"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/book_seller_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:singleLine="true"
+                                android:text="맛간동자"
+                                android:textSize="13dp" />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true">
+
+                            <com.jwoos.android.sellbook.widget.RialTextView
+                                android:id="@+id/book_price_before"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="22000"
+                                android:textSize="14dp" />
+
+                            <com.jwoos.android.sellbook.widget.RialTextView
+                                android:id="@+id/book_price_after"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_below="@+id/book_price_before"
+                                android:layout_marginTop="3dp"
+                                android:text="15000"
+                                android:textColor="@color/black"
+                                android:textSize="17dp" />
+
+                            <TextView
+                                android:id="@+id/book_discount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_below="@+id/book_price_after"
+                                android:layout_marginTop="3dp"
+                                android:text="[54%]"
+                                android:textColor="@color/red"
+                                android:textSize="15dp" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
                 </RelativeLayout>
 
             </RelativeLayout>
-        </LinearLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
-    </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/btn_background_color" />
 
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
 

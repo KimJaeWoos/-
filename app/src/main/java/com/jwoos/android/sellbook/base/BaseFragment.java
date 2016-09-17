@@ -1,6 +1,7 @@
 package com.jwoos.android.sellbook.base;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jwoos.android.sellbook.R;
@@ -30,6 +32,7 @@ public abstract class BaseFragment extends Fragment {
     public String base_image_url_profile = Gloval.getBase_image_url_profile();
 
     private AlertDialog dialog;
+    private Dialog loading_dialog;
     private Toast toast;
 
 
@@ -40,7 +43,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void setToolbar(String title,Toolbar toolbar){
-        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back);
         upArrow.setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         toolbar.setTitle(title);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -66,17 +69,31 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void showDialog(CharSequence msg){
-        if (dialog != null && dialog.isShowing()) dimssDialog();
+        /*if (dialog != null && dialog.isShowing()) dimssDialog();
         dialog = new SpotsDialog(getContext(), msg);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
-        dialog.show();
+        dialog.show();*/
+
+        if (loading_dialog != null && loading_dialog.isShowing()) dimssDialog();
+        loading_dialog = new Dialog(getActivity(), R.style.progress_dialog);
+        loading_dialog.setContentView(R.layout.layout_dialog_loading);
+        loading_dialog.setCancelable(false);
+        loading_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        TextView loading_msg = (TextView) loading_dialog.findViewById(R.id.id_tv_loadingmsg);
+        loading_msg.setText(msg);
+        loading_dialog.show();
     }
 
     protected void dimssDialog(){
-        if (dialog != null){
+        /*if (dialog != null){
             dialog.dismiss();
             dialog = null;
+        }*/
+
+        if (loading_dialog != null) {
+            loading_dialog.dismiss();
+            loading_dialog = null;
         }
     }
     protected void showToast(String msg) {

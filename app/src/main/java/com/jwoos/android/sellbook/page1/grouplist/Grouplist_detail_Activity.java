@@ -1,8 +1,8 @@
 package com.jwoos.android.sellbook.page1.grouplist;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -30,8 +31,8 @@ import com.jwoos.android.sellbook.base.retrofit.model.Comment;
 import com.jwoos.android.sellbook.page1.ImagePager_Activity;
 import com.jwoos.android.sellbook.page1.adapter.CommentAdapter;
 import com.jwoos.android.sellbook.page1.userinfo.Userinfo_Activity;
+import com.jwoos.android.sellbook.utils.Dlog;
 import com.jwoos.android.sellbook.utils.ObjectUtils;
-import com.jwoos.android.sellbook.utils.TimeFomat;
 import com.jwoos.android.sellbook.widget.CommentEditText;
 import com.jwoos.android.sellbook.widget.MLRoundedImageView;
 import com.jwoos.android.sellbook.widget.RialTextView;
@@ -40,7 +41,6 @@ import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -53,22 +53,22 @@ public class Grouplist_detail_Activity extends BaseActivity {
 
     @BindView(R.id.sv)
     ScrollView sv;
-    @BindView(R.id.toolbar_img)
-    MLRoundedImageView iv_toolbar;
     @BindView(R.id.favorite)
     ImageView fa;
-    @BindView(R.id.toolbar_nic)
-    TextView tv_toolbar;
     @BindView(R.id.detail2_price)
     RialTextView tv_price;
-    @BindView(R.id.book_name)
-    TextView tv_book_name;
+    @BindView(R.id.user_img)
+    MLRoundedImageView iv_user;
+    @BindView(R.id.user_nic)
+    TextView tv_nic;
+    @BindView(R.id.book_condition)
+    TextView tv_condition;
     @BindView(R.id.book_category)
     TextView tv_category;
-    @BindView(R.id.book_content)
-    TextView tv_book_content;
-    @BindView(R.id.time)
-    TextView tv_time;
+    @BindView(R.id.book_description)
+    TextView tv_description;
+    @BindView(R.id.book_board)
+    TextView tv_content;
     @BindView(R.id.img_indicator)
     Indicator indicater;
     @BindView(R.id.img_viewPager)
@@ -89,19 +89,18 @@ public class Grouplist_detail_Activity extends BaseActivity {
     LinearLayout bottom;
     @BindView(R.id.comment)
     RelativeLayout comment;
-
+    @BindView(R.id.after_price)
+    TextView tv_after_price;
 
 
     private final int FAVORITE_OK = 1;
-    private final int FAVORITE_CANCEL = 2;;
+    private final int FAVORITE_CANCEL = 2;
     private IndicatorViewPager indicatorViewPager;
     private LayoutInflater inflate;
     private String book_id;
     private String[] images;
-    private boolean comment_flag;
     private List<Book_Info> items;
     private InputMethodManager mgr;
-    private int item_position;
     private CommentAdapter ctAdapter;
 
 
@@ -111,28 +110,25 @@ public class Grouplist_detail_Activity extends BaseActivity {
         setContentView(R.layout.activity_grouplist_detail);
         mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         setToolbar("");
+
+        //화살표 닫기
         this.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+
         initialize();
         initialize_comment();
         detail_record();
 
-        //댓글아이콘을 눌렀을경우
-        if (comment_flag) {
-            comment.performClick();
-        }
     }
 
 
     private void initialize() {
         Intent extras = getIntent();
         book_id = extras.getStringExtra("book_id");
-        item_position = extras.getIntExtra("item_position",0);
-        comment_flag = extras.getBooleanExtra("comment_flag",false);
 
         ServiceGenerator.getService().getBook_detail(book_id, new retrofit.Callback<List<Book_Info>>() {
             @Override
@@ -143,24 +139,21 @@ public class Grouplist_detail_Activity extends BaseActivity {
 
                 //이미지 회전체크
                 int book_rotate = Character.getNumericValue(bookInfos.get(0).getUser_profile_img_path().charAt(9));
-
                 Picasso.with(getBaseContext())
                         .load(base_image_url_profile + bookInfos.get(0).getUser_profile_img_path())
                         .rotate(orientation(book_rotate))
                         .fit()
-                        .into(iv_toolbar);
-                tv_toolbar.setText(bookInfos.get(0).getUser_nik());
-                tv_price.setText(bookInfos.get(0).getBook_price());
-                tv_book_name.setText(bookInfos.get(0).getBook_name());
-                tv_category.setText("카테고리 : " + bookInfos.get(0).getBook_category());
-                tv_book_content.setText(bookInfos.get(0).getBook_content());
+                        .into(iv_user);
+                tv_nic.setText(bookInfos.get(0).getUser_nik());
+                tv_price.setText(bookInfos.get(0).getBook_sellprice());
+                tv_condition.setText(bookInfos.get(0).getBook_condition());
+                tv_category.setText(bookInfos.get(0).getBook_category());
+                tv_description.setText(bookInfos.get(0).getBook_description());
+                tv_content.setText(bookInfos.get(0).getBook_content());
+                tv_after_price.setText(bookInfos.get(0).getBook_price());
+                tv_after_price.setPaintFlags(tv_after_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-                //시간포맷
-                try {
-                    tv_time.setText(TimeFomat.detail_time(bookInfos.get(0).getBook_register_time()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+
                 //솔드아웃 셋팅
                 if (bookInfos.get(0).getSold_kind().equals("YES")) {
                     tv_soldout.setVisibility(View.VISIBLE);
@@ -180,11 +173,12 @@ public class Grouplist_detail_Activity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-
+                Dlog.e(error.getMessage());
             }
         });
     }
 
+    //댓글 셋팅
     private void initialize_comment() {
         rv_comment.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -200,7 +194,7 @@ public class Grouplist_detail_Activity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
-
+                Dlog.e(error.getMessage());
             }
         });
 
@@ -211,10 +205,12 @@ public class Grouplist_detail_Activity extends BaseActivity {
         ServiceGenerator.getService().set_favorite(book_id, flag, new retrofit.Callback<Void>() {
             @Override
             public void success(Void aVoid, Response response) {
+                Dlog.d("즐겨찾기 성공");
             }
 
             @Override
             public void failure(RetrofitError error) {
+                Dlog.e("즐겨찾기 실패");
             }
         });
     }
@@ -225,12 +221,8 @@ public class Grouplist_detail_Activity extends BaseActivity {
             images = new String[]{items.get(0).getBook_image1()};
         } else if (items.get(0).getBook_image3().length() < 1) {
             images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2()};
-        } else if (items.get(0).getBook_image4().length() < 1) {
-            images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2(), items.get(0).getBook_image3()};
-        } else if (items.get(0).getBook_image5().length() < 1) {
-            images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2(), items.get(0).getBook_image3(), items.get(0).getBook_image4()};
         } else {
-            images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2(), items.get(0).getBook_image3(), items.get(0).getBook_image4(), items.get(0).getBook_image5()};
+            images = new String[]{items.get(0).getBook_image1(), items.get(0).getBook_image2(), items.get(0).getBook_image3()};
         }
     }
 
@@ -241,7 +233,7 @@ public class Grouplist_detail_Activity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.comment, R.id.send_msg, R.id.click_user, R.id.favorite, R.id.comment_add})
+    @OnClick({R.id.comment, R.id.send_msg, R.id.favorite, R.id.comment_add, R.id.click_user, R.id.condition_guide})
     public void click(View v) {
         Intent intent = null;
         switch (v.getId()) {
@@ -272,7 +264,7 @@ public class Grouplist_detail_Activity extends BaseActivity {
                             push_notification();
 
                             Handler mHandler = new Handler();
-                            mHandler.postDelayed(new Runnable()  {
+                            mHandler.postDelayed(new Runnable() {
                                 public void run() {
                                     sv.scrollTo(0, rv_comment.getBottom());
                                 }
@@ -290,6 +282,9 @@ public class Grouplist_detail_Activity extends BaseActivity {
                             .playOn(et_comment);
                 }
                 break;
+            case R.id.condition_guide:
+
+                break;
 
             case R.id.send_msg:
                 intent = new Intent(this, PopupActivity.class);
@@ -304,7 +299,7 @@ public class Grouplist_detail_Activity extends BaseActivity {
                 intent = new Intent(this, Userinfo_Activity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("profile_flag", book_id);
-                finish();
+                overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
                 break;
 
             case R.id.favorite:
@@ -328,6 +323,7 @@ public class Grouplist_detail_Activity extends BaseActivity {
 
         if (intent != null) {
             startActivity(intent);
+
         }
 
     }
@@ -336,36 +332,30 @@ public class Grouplist_detail_Activity extends BaseActivity {
         ServiceGenerator.getService().fcm_push(book_id, new retrofit.Callback<Void>() {
             @Override
             public void success(Void aVoid, Response response) {
-
+                Dlog.d("푸쉬보내기 성공");
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                Dlog.e(error.getMessage());
             }
         });
     }
 
 
-
     @Override
     public void onBackPressed() {
+        //키패드 내리기
+        mgr.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
+
         //북마크 상태 전달
         if (btn_menu.getVisibility() == View.GONE) {
             btn_menu.setVisibility(View.VISIBLE);
             bottom.setVisibility(View.GONE);
         } else {
-            Bundle extra = new Bundle();
-            Intent intent = new Intent();
-            extra.putString("book_id",book_id);
-            extra.putInt("item_position",item_position);
-            extra.putString("item_flag",fa.getTag().toString());
-            intent.putExtras(extra);
-            setResult(Activity.RESULT_OK,intent);
             super.onBackPressed();
-
+            overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
         }
-        mgr.hideSoftInputFromWindow(et_comment.getWindowToken(), 0);
     }
 
     @Override
@@ -379,87 +369,112 @@ public class Grouplist_detail_Activity extends BaseActivity {
     protected void onStop() {
         cancelToast();
         super.onStop();
-
     }
 
 
-
-
-
-
+    //이미지 뷰페이저
     private IndicatorViewPager.IndicatorPagerAdapter adapter = new IndicatorViewPager.IndicatorViewPagerAdapter() {
 
         @Override
         public View getViewForTab(int position, View convertView, ViewGroup container) {
             if (convertView == null) {
                 convertView = inflate.inflate(R.layout.tab_guide, container, false);
-                if (images.length == 1) {
-                    convertView.setVisibility(View.INVISIBLE);
-                }
             }
             return convertView;
         }
 
         @Override
         public View getViewForPage(int position, View convertView, ViewGroup container) {
-            if (convertView == null) {
+            //페이지 인플레이션
+            Dlog.d(String.valueOf(position));
+
+            if (position == 0) {
+                Dlog.d("커버추가사진");
+                convertView = inflate.inflate(R.layout.image_cover, container, false);
+                convertView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            } else {
+                Dlog.d("사용자추가사진");
                 convertView = inflate.inflate(R.layout.image, container, false);
                 convertView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             }
 
-            int book_rotate = Character.getNumericValue(images[position].charAt(9));
 
-            Picasso.with(getBaseContext())
-                    .load(base_image_url_uploads + images[position])
-                    .rotate(orientation(book_rotate))
-                    .into((ImageView) convertView, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            dimssDialog();
+            //페이지 셋팅
+            if (position == 0) {
+                ImageView iv_cover = (ImageView) convertView.findViewById(R.id.book_cover);
+                final TextView tv_name = (TextView) convertView.findViewById(R.id.book_name);
+                TextView tv_author = (TextView) convertView.findViewById(R.id.book_author);
+                TextView tv_publisher = (TextView) convertView.findViewById(R.id.book_publisher);
+
+                Picasso.with(getBaseContext())
+                        .load(items.get(0).getBook_cover())
+                        .into((ImageView) iv_cover);
+                tv_name.setText(items.get(0).getBook_name());
+                tv_author.setText(items.get(0).getBook_author());
+                tv_publisher.setText(items.get(0).getBook_publisher() + "|"
+                        + items.get(0).getBook_pubDate().substring(0, 4));
+
+                tv_name.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        switch (event.getAction()) {
+                            //누를떄,움직일떄
+                            case MotionEvent.ACTION_DOWN:
+                            case MotionEvent.ACTION_MOVE:
+                                tv_name.setSelected(true);
+                                break;
+                            //땟을때
+                            case MotionEvent.ACTION_CANCEL:
+                            case MotionEvent.ACTION_UP:
+                                tv_name.setSelected(false);
+                                break;
                         }
+                        return false;
+                    }
+                });
 
-                        @Override
-                        public void onError() {
 
-                        }
-                    });
+            } else {
+                int book_rotate = Character.getNumericValue(images[position - 1].charAt(9));
+                Picasso.with(getBaseContext())
+                        .load(base_image_url_uploads + images[position - 1])
+                        .rotate(orientation(book_rotate))
+                        .into((ImageView) convertView);
 
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getBaseContext(), ImagePager_Activity.class);
-                    intent.setFlags(intent.FLAG_ACTIVITY_NO_HISTORY);
-                    intent.putExtra("image1", items.get(0).getBook_image1());
-                    intent.putExtra("image2", items.get(0).getBook_image2());
-                    intent.putExtra("image3", items.get(0).getBook_image3());
-                    intent.putExtra("image4", items.get(0).getBook_image4());
-                    intent.putExtra("image5", items.get(0).getBook_image5());
-                    startActivity(intent);
-                }
-            });
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getBaseContext(), ImagePager_Activity.class);
+                        intent.setFlags(intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.putExtra("image1", items.get(0).getBook_image1());
+                        intent.putExtra("image2", items.get(0).getBook_image2());
+                        intent.putExtra("image3", items.get(0).getBook_image3());
+                        startActivity(intent);
+                    }
+                });
+            }
             return convertView;
         }
 
         @Override
         public int getCount() {
-            return images.length;
+            return images.length + 1;
         }
     };
 
+    //사용자 게시글 히스토리
     private void detail_record() {
         ServiceGenerator.getService().set_detail_record(book_id, new retrofit.Callback<Void>() {
             @Override
             public void success(Void aVoid, Response response) {
-
+                Dlog.d("히스토리 성공");
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                Dlog.e("히스토리 실패");
             }
         });
     }
-
-
 
 }

@@ -62,6 +62,10 @@
             android:theme="@style/CustomDialog"
             />
         <activity
+            android:name=".page2.BookInfo_Popup"
+            android:theme="@style/CustomDialog"
+            />
+        <activity
             android:name=".page1.grouplist.Grouplist_detail_Activity"
             />
         <activity android:name=".page1.favorite.Favorite_Activity"/>

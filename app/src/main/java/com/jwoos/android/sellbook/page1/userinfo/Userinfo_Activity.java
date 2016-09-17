@@ -19,6 +19,7 @@ import com.jwoos.android.sellbook.base.BaseActivity;
 import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
 import com.jwoos.android.sellbook.base.retrofit.model.Book_Info;
 import com.jwoos.android.sellbook.page1.adapter.GridAdapter;
+import com.jwoos.android.sellbook.page1.adapter.GridAdapter_UserInfo;
 import com.jwoos.android.sellbook.page1.adapter.RecyclerItemClickListener;
 import com.jwoos.android.sellbook.page1.grouplist.Grouplist_detail_Activity;
 import com.jwoos.android.sellbook.widget.MLRoundedImageView;
@@ -59,14 +60,11 @@ public class Userinfo_Activity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    GridAdapter mAdapter;
+    GridAdapter_UserInfo mAdapter;
 
-
-    private MaterialDialog alert;
     private GridLayoutManager lLayout;
     private List<Book_Info> items;
     private boolean first_count;
-    private String data_empty;
     private String book_id;
 
     @Override
@@ -134,31 +132,24 @@ public class Userinfo_Activity extends BaseActivity {
                 });
 
                 //데이터가 비어있는지 확인
-                data_empty = bookInfos.get(0).getEmpty_chk();
-                if (data_empty.equals("true")) {
-                    if (first_count == true) {
-                        first_count = false;
-                        items = new ArrayList<>();
-                        mAdapter = new GridAdapter(Userinfo_Activity.this, items, false);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mRecyclerView.addOnItemTouchListener(
-                                new RecyclerItemClickListener(getBaseContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                if (bookInfos.get(0).getEmpty_chk().equals("true")) {
+                    mAdapter = new GridAdapter_UserInfo(Userinfo_Activity.this, bookInfos, false);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.addOnItemTouchListener(
+                            new RecyclerItemClickListener(getBaseContext(), new RecyclerItemClickListener.OnItemClickListener() {
 
-                                    @Override
-                                    public void onItemClick(View view, int position) {
-                                        Intent intent = null;
-                                        intent = new Intent(getBaseContext(), Grouplist_detail_Activity.class);
-                                        intent.putExtra("book_id", bookInfos.get(position).getBook_id());
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intent);
-                                        overridePendingTransition(0, 0);
+                                @Override
+                                public void onItemClick(View view, int position) {
+                                    Intent intent = null;
+                                    intent = new Intent(getBaseContext(), Grouplist_detail_Activity.class);
+                                    intent.putExtra("book_id", bookInfos.get(position).getBook_id());
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                    overridePendingTransition(0, 0);
 
-                                    }
-                                }));
-                        for (int i = 0; i < bookInfos.size(); i++) {
-                            items.add(bookInfos.get(i));
-                        }
-                    }
+                                }
+                            }));
+
 
                     //판매중 판매완료 카운트
                     if (String.valueOf(bookInfos.size()) == bookInfos.get(0).getSell_count()) {

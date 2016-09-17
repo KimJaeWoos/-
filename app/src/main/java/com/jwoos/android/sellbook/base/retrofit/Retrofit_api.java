@@ -6,7 +6,6 @@ import com.jwoos.android.sellbook.base.retrofit.model.Calling;
 import com.jwoos.android.sellbook.base.retrofit.model.Comment;
 import com.jwoos.android.sellbook.base.retrofit.model.Favorites;
 import com.jwoos.android.sellbook.base.retrofit.model.Login;
-import com.jwoos.android.sellbook.base.retrofit.model.NaverInfo;
 import com.jwoos.android.sellbook.base.retrofit.model.Notice;
 
 import java.util.List;
@@ -66,14 +65,19 @@ public interface Retrofit_api {
     @FormUrlEncoded
     @POST("/api/register_book.php")
     void Create_board(@Field("book_name") String book_name,
+                      @Field("book_author") String book_author,
+                      @Field("book_pubDate") String book_pubDate,
+                      @Field("book_description") String book_description,
+                      @Field("book_cover") String book_cover,
                       @Field("book_category") String book_category,
+                      @Field("book_publisher") String book_publisher,
                       @Field("book_price") String book_price,
-                      @Field("book_content") String book_content,
                       @Field("book_image1") String book_image1,
                       @Field("book_image2") String book_image2,
                       @Field("book_image3") String book_image3,
-                      @Field("book_image4") String book_image4,
-                      @Field("book_image5") String book_image5,
+                      @Field("book_condition") String book_condition,
+                      @Field("book_sellprice") String book_sellprice,
+                      @Field("book_content") String book_content,
                       Callback<Void> response);
 
     @GET("/api/my_info.php")
@@ -97,10 +101,7 @@ public interface Retrofit_api {
                       Callback<List<Book_Info>> response);
 
     @GET("/api/book_list_search.php")
-    void getBook_search(@Query("item_start") int item_start,
-                        @Query("item_end") int item_end,
-                        @Query("keyword") String keyword,
-                        @Query("category") String category,
+    void getBook_search(@Query("keyword") String keyword,
                         Callback<List<Book_Info>> response);
 
     @GET("/api/book_list_detail.php")
@@ -124,7 +125,10 @@ public interface Retrofit_api {
                       Callback<Void> response);
 
     @GET("/api/get_favorite_item.php")
-    void get_favorite_item(Callback<List<Favorites>> response);
+    void get_favorite_item(Callback<List<Book_Info>> response);
+
+    @GET("/api/get_history.php")
+    void get_histoty(Callback<List<Book_Info>> response);
 
     @GET("/api/set_phone.php")
     void set_userPhone(@Query("user_phone") String user_phone,
@@ -178,8 +182,4 @@ public interface Retrofit_api {
     void get_record(@Field("user_phone") String phoneNum,
                     Callback<List<Calling>> response);
 
-    @GET("/")
-    void getIsbn(@Query("d_isbn") String d_isbn,
-                 @Query("query") String query,
-                 Callback<NaverInfo> response);
 }

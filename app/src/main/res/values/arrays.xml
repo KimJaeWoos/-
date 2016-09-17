@@ -9,18 +9,18 @@
     </integer-array>
 
     <string-array name="names">
-        <item>A+ 뜯고 사용하지않음, 필기가 전혀 없음</item>
-        <item>A 약간의 사용감 존재, 필기가 약간 있음</item>
-        <item>B 사용흔적이 다수 있고, 대부분 페이지에 필기가 있음</item>
-        <item>C 상태가 많이 안좋지만 보는데는 지장이 없음</item>
+        <item>뜯고 사용하지않음, 필기가 전혀 없음</item>
+        <item>약간의 사용감 존재, 필기가 약간 있음</item>
+        <item>사용흔적이 다수 있고, 대부분 페이지에 필기가 있음</item>
+        <item>상태가 많이 안좋지만 보는데는 지장이 없음</item>
 
     </string-array>
 
     <string-array name="ids">
-        <item>a</item>
-        <item>b</item>
-        <item>c</item>
-        <item>d</item>
+        <item>A+</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
     </string-array>
 
     <integer-array name="google_colors">

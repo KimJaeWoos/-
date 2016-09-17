@@ -35,6 +35,9 @@ public class Page2_Activity extends BaseActivity {
             case 4:
                 input_board(input_data);
                 break;
+            case 5:
+                input_phone();
+                break;
         }
 
     }

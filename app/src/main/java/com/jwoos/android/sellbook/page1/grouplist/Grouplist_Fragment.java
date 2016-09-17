@@ -24,14 +24,4 @@ public class Grouplist_Fragment extends BaseFragment {
 
         return rootView;
     }
-
-
-
-
-
-
-
-
-
-
 }

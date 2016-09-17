@@ -141,7 +141,8 @@ public class MainPage3_Fragment extends BaseFragment implements View.OnClickList
             }
             //홈페이지
             case R.id.btn_setting_homepage: {
-                showToast("준비중입니다 :)");
+                Gloval.setSetting_count(1);
+                intent = new Intent(getActivity(), Board_Activity.class);
                 break;
             }
             //페이스북
@@ -222,7 +223,6 @@ public class MainPage3_Fragment extends BaseFragment implements View.OnClickList
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             getActivity().startActivityForResult(intent, INTENT_REQUEST_ACTIVITY_PHONE);
         }
-        getActivity().overridePendingTransition(0, 0);
 
 
     }

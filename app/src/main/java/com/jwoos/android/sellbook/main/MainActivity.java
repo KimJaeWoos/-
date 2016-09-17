@@ -55,7 +55,6 @@ public class MainActivity extends BaseActivity {
             Intent intent = new Intent(this,Myinfo_detail_Activity.class);
             intent.putExtra("book_id", Gloval.getNoti_book_id());
             startActivity(intent);
-            overridePendingTransition(0,0);
         }
     }
 

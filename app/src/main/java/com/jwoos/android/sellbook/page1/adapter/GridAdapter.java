@@ -1,7 +1,6 @@
 package com.jwoos.android.sellbook.page1.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.jwoos.android.sellbook.R;
 import com.jwoos.android.sellbook.base.Gloval;
-import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
 import com.jwoos.android.sellbook.base.retrofit.model.Book_Info;
 import com.jwoos.android.sellbook.page1.myinfo.Myinfo_detail_Activity;
 import com.squareup.picasso.Picasso;
@@ -24,9 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
@@ -36,7 +31,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     private String base_image_url_uploads;
     private String base_image_url_profile;
     private boolean click_flag;
-    private final static int REQ_CODE = 1300;
+    private final static int REQ_CODE = 4321;
 
     public GridAdapter(Activity context, List<Book_Info> objects, boolean flag) {
         this.mContext = context;
@@ -63,7 +58,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Nullable @BindView(R.id.card_view)
+        /*@Nullable @BindView(R.id.card_view)
         CardView cardView;
         @Nullable @BindView(R.id.book_name)
         TextView tv_bookname;
@@ -74,7 +69,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
         @Nullable @BindView(R.id.image)
         ImageView imageView;
         @Nullable @BindView(R.id.soldout_view)
-        TextView tv_soldout;
+        TextView tv_soldout;*/
 
         private String image;
 
@@ -84,7 +79,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
         }
 
         public void bind(final int position){
-            int book_rotate = Character.getNumericValue(bookInfos.get(position).getBook_image1().charAt(9));
+            /*int book_rotate = Character.getNumericValue(bookInfos.get(position).getBook_image1().charAt(9));
 
             Picasso.with(mContext)
                     .load(base_image_url_uploads + bookInfos.get(position).getBook_image1())
@@ -118,13 +113,12 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 });
             } else {
 
-            }
+            }*/
         }
 
         private int orientation(int orientation) {
 
             int rotate = 0;
-
 
             if (orientation == 2)
                 rotate = 0;

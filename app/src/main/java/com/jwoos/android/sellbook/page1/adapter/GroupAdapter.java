@@ -1,427 +1,169 @@
 package com.jwoos.android.sellbook.page1.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.jwoos.android.sellbook.R;
-import com.jwoos.android.sellbook.base.Gloval;
-import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
 import com.jwoos.android.sellbook.base.retrofit.model.Book_Info;
 import com.jwoos.android.sellbook.page1.grouplist.Grouplist_detail_Activity;
-import com.jwoos.android.sellbook.page1.myinfo.Myinfo_detail_Activity;
 import com.jwoos.android.sellbook.utils.Dlog;
-import com.jwoos.android.sellbook.utils.ObjectUtils;
-import com.jwoos.android.sellbook.utils.TimeFomat;
-import com.jwoos.android.sellbook.widget.MLRoundedImageView;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import butterknife.OnClick;
+import butterknife.OnTouch;
 
+/**
+ * Created by Jwoo on 2016-08-08.
+ */
+public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private Activity context;
+    private List<Book_Info> book_infos;
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> {
-
-    private List<Book_Info> bookInfos;
-    private Activity mContext;
-    private String base_image_url_uploads;
-    private String base_image_url_profile;
-    private final static int FAVORITE_OK = 1;
-    private final static int FAVORITE_CANCEL = 2;
-    private final static int REQ_CODE = 5000;
-    private final static int REQ_CODE2 = 2500;
-    private int item_position;
-    private String book_id;
-
-    public GroupAdapter(Activity context, List<Book_Info> objects) {
-        this.mContext = (Activity)context;
-        this.bookInfos = objects;
-        this.base_image_url_uploads = Gloval.getBase_image_url_uploads();
-        this.base_image_url_profile = Gloval.getBase_image_url_profile();
+    //생성자
+    public GroupAdapter(Activity context, List<Book_Info> list) {
+        this.context = context;
+        this.book_infos = list;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_item_list, viewGroup, false);
-        return new ViewHolder(v);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //카드 아이템을 인플레이트
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item_list2, parent, false);
+        return new ViewHolder_Body(v);
+
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        try {
-            viewHolder.bind(i);
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        if (holder instanceof ViewHolder_Body) {
+            final ViewHolder_Body body_holder = (ViewHolder_Body) holder;
+
+            body_holder.tv_title.setText(book_infos.get(position).getBook_name());
+            body_holder.tv_publisher.setText(book_infos.get(position).getBook_author() + "|" + book_infos.get(position).getBook_publisher());
+            body_holder.tv_date.setText(book_infos.get(position).getBook_pubDate());
+            body_holder.tv_category.setText(book_infos.get(position).getBook_category());
+            body_holder.tv_condition.setText(book_infos.get(position).getBook_condition());
+            body_holder.tv_nic.setText(book_infos.get(position).getUser_nik());
+            body_holder.tv_before_price.setText(book_infos.get(position).getBook_price());
+            body_holder.tv_after_price.setText(book_infos.get(position).getBook_sellprice());
+            body_holder.tv_before_price.setPaintFlags(body_holder.tv_before_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            Picasso.with(context)
+                    .load(book_infos.get(position).getBook_cover())
+                    .fit()
+                    .into(body_holder.iv_cover);
+
+            String discount = getDiscount(book_infos.get(position).getBook_price(), book_infos.get(position).getBook_sellprice());
+            body_holder.tv_discount.setText("[" + discount + "%↓]");
+
+            assert body_holder.btn_click != null;
+            body_holder.btn_click.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        //누를떄,움직일떄
+                        case MotionEvent.ACTION_DOWN:
+                        case MotionEvent.ACTION_MOVE:
+                            body_holder.tv_category.setSelected(true);
+                            break;
+                        //땟을때
+                        case MotionEvent.ACTION_CANCEL:
+                        case MotionEvent.ACTION_UP:
+                            body_holder.tv_category.setSelected(false);
+                            break;
+                    }
+                    return false;
+                }
+            });
+
+
         }
+    }
+
+    private String getDiscount(String book_price, String book_sellprice) {
+        Dlog.d(book_price + "/" + book_sellprice);
+        double discount = 0;
+        double after = Integer.parseInt(book_price);
+        double before = Integer.parseInt(book_sellprice);
+
+        discount = Math.round(((after - before) / after) * 100);
+
+        return String.valueOf((int) discount);
     }
 
     @Override
     public int getItemCount() {
-        return bookInfos.size();
+        return book_infos.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @Nullable
-        @BindView(R.id.card_view)
-        CardView cardView;
-        @Nullable
-        @BindView(R.id.card_profile)
-        MLRoundedImageView iv_profile;
-        @Nullable
-        @BindView(R.id.card_nic)
-        TextView tv_username;
-        @Nullable
-        @BindView(R.id.card_time)
-        TextView tv_time;
-        @Nullable
-        @BindView(R.id.selected_photos_container)
-        ViewGroup mSelectedImagesContainer;
-        @Nullable
-        @BindView(R.id.book_name)
-        TextView tv_bookname;
-        @Nullable
-        @BindView(R.id.book_price)
-        TextView tv_bookprice;
-        @Nullable
-        @BindView(R.id.book_content)
-        TextView tv_bookcontent;
-        @Nullable
-        @BindView(R.id.soldout_view)
-        TextView tv_soldout;
-        @Nullable
-        @BindView(R.id.favorite)
-        ImageView iv_favorite;
-        @Nullable
-        @BindView(R.id.comment)
-        ImageView iv_comment;
-        @Nullable
-        @BindView(R.id.favorite_cnt)
-        TextView tv_favorite_cnt;
-        @Nullable
-        @BindView(R.id.comment_cnt)
-        TextView tv_comment_cnt;
-        @Nullable
-        @BindView(R.id.maxLine_text)
-        TextView max_text;
+    //바디
+    public class ViewHolder_Body extends RecyclerView.ViewHolder {
 
-        private String[] image;
+        @Nullable
+        @BindView(R.id.book_title)
+        TextView tv_title; //책제목
+        @Nullable
+        @BindView(R.id.book_publisher)
+        TextView tv_publisher; //책지은이
+        @Nullable
+        @BindView(R.id.book_date_content)
+        TextView tv_date; //출판년도
+        @Nullable
+        @BindView(R.id.book_category_content)
+        TextView tv_category; //카테고리
+        @Nullable
+        @BindView(R.id.book_state_content)
+        TextView tv_condition; //책 상태
+        @Nullable
+        @BindView(R.id.book_seller_content)
+        TextView tv_nic; //판매자 이름
+        @Nullable
+        @BindView(R.id.book_price_before)
+        TextView tv_before_price; //정가
+        @Nullable
+        @BindView(R.id.book_price_after)
+        TextView tv_after_price; //판매가
+        @Nullable
+        @BindView(R.id.book_discount)
+        TextView tv_discount; //할인률
+        @Nullable
+        @BindView(R.id.book_cover)
+        ImageView iv_cover;
+        @Nullable
+        @BindView(R.id.item_click)
+        MaterialRippleLayout btn_click;
 
-        public ViewHolder(View itemView) {
+
+        public ViewHolder_Body(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
         }
 
-        public void bind(int position) throws ParseException {
-            //프로필 사진 회전값
-            int profile_rotate = Character.getNumericValue(bookInfos.get(position).getUser_profile_img_path().charAt(9));
-            Picasso.with(mContext)
-                    .load(base_image_url_profile + bookInfos.get(position).getUser_profile_img_path())
-                    .fit()
-                    .rotate(orientation(profile_rotate))
-                    .into(iv_profile);
-            tv_username.setText(bookInfos.get(position).getUser_nik());
-
-            //시간포멧
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-            Date date = format.parse(bookInfos.get(position).getBook_register_time());
-            String time = TimeFomat.list_time(date);
-            tv_time.setText(time);
-
-            tv_bookname.setText("책 제목 : " + bookInfos.get(position).getBook_name());
-            tv_bookcontent.setText(bookInfos.get(position).getBook_content());
-            tv_bookprice.setText(bookInfos.get(position).getBook_price());
-            tv_comment_cnt.setText(bookInfos.get(position).getComment_count());
-            tv_favorite_cnt.setText(bookInfos.get(position).getFavorite_count());
-
-            //내용이 1줄이상일 경우
-            tv_bookcontent.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (tv_bookcontent.getLineCount() > 1 ) {
-                        max_text.setVisibility(View.VISIBLE);
-                    } else {
-                        max_text.setVisibility(View.GONE);
-                    }
-                }
-            });
-
-
-            //판매완료 확인
-            if (bookInfos.get(position).getSold_kind().equals("YES")) {
-                tv_soldout.setVisibility(View.VISIBLE);
-            } else {
-                tv_soldout.setVisibility(View.INVISIBLE);
-            }
-
-            //이미지 셋팅
-            imageSetting();
-            image = new String[] {bookInfos.get(position).getBook_image1(), bookInfos.get(position).getBook_image2(), bookInfos.get(position).getBook_image3(),
-                                    bookInfos.get(position).getBook_image4(), bookInfos.get(position).getBook_image5()};
-            showMedia(image);
-
-            //자신이 올린 게시물은 즐켜찾기 버튼 비활성화
-            if(bookInfos.get(position).getUser_chk().equals("NO")) {
-                if (bookInfos.get(position).getFavorite_count().equals("0")) {
-                    tv_favorite_cnt.setVisibility(View.INVISIBLE);
-                } else {
-                    tv_favorite_cnt.setVisibility(View.VISIBLE);
-                }
-                click(position, bookInfos.get(position).getBook_id(), bookInfos.get(position).getFavorite_chk());
-            } else {
-                iv_favorite.setClickable(false);
-                tv_favorite_cnt.setVisibility(View.VISIBLE);
-            }
-
-            detail_click(position, bookInfos.get(position).getUser_chk());
+        @OnClick(R.id.item_click)
+        public void itemClick(View v) {
+            Intent intent = new Intent(context, Grouplist_detail_Activity.class);
+            intent.putExtra("book_id", book_infos.get(getPosition()).getBook_id());
+            context.startActivity(intent);
+            context.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }
-
-        private void imageSetting() {
-        }
-
-        private void detail_click(final int position, final String flag) {
-            assert cardView != null;
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = null;
-                    if (flag.equals("OK")){
-                        intent = new Intent(mContext, Myinfo_detail_Activity.class);
-                        intent.putExtra("book_id", bookInfos.get(position).getBook_id());
-                        intent.putExtra("item_position",position);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivityForResult(intent, REQ_CODE2);
-
-                    } else if (flag.equals("NO")) {
-                        intent = new Intent(mContext, Grouplist_detail_Activity.class);
-                        intent.putExtra("book_id", bookInfos.get(position).getBook_id());
-                        intent.putExtra("item_position",position);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivityForResult(intent, REQ_CODE);
-
-                    }
-                    mContext.overridePendingTransition(0,0);
-                }
-            });
-
-            assert iv_comment != null;
-            iv_comment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = null;
-                    if (flag.equals("OK")){
-                        intent = new Intent(mContext, Myinfo_detail_Activity.class);
-                        intent.putExtra("book_id", bookInfos.get(position).getBook_id());
-                        intent.putExtra("item_position",position);
-                        intent.putExtra("comment_flag",true);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivityForResult(intent, REQ_CODE2);
-
-                    } else if (flag.equals("NO")) {
-                        intent = new Intent(mContext, Grouplist_detail_Activity.class);
-                        intent.putExtra("book_id", bookInfos.get(position).getBook_id());
-                        intent.putExtra("item_position",position);
-                        intent.putExtra("comment_flag",true);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivityForResult(intent, REQ_CODE);
-
-                    }
-                    mContext.overridePendingTransition(0,0);
-                }
-            });
-        }
-
-
-        private void click(final int position, final String book_id, final String favorite_chk) {
-            if (favorite_chk.equals("OK")) {
-                iv_favorite.setTag(FAVORITE_OK);
-                iv_favorite.setBackgroundResource(R.drawable.ic_bookmark);
-            } else {
-                iv_favorite.setTag(FAVORITE_CANCEL);
-                iv_favorite.setBackgroundResource(R.drawable.ic_bookmark_grey);
-            }
-
-            iv_favorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    //final int cnt = Integer.parseInt(favorite_chk); //처음 나타나는 카운트 갯수
-                    if (v.getTag().equals(FAVORITE_OK)) {
-                        int cnt = Integer.parseInt(tv_favorite_cnt.getText().toString());
-                        cnt = cnt - 1;
-                        v.setTag(FAVORITE_CANCEL);
-                        if ( cnt > 0) {
-                            tv_favorite_cnt.setVisibility(View.VISIBLE);
-                        } else {
-                            tv_favorite_cnt.setVisibility(View.INVISIBLE);
-                        }
-                        tv_favorite_cnt.setText(String.valueOf(cnt));
-                        YoYo.with(Techniques.BounceInDown)
-                                .duration(300)
-                                .playOn(tv_favorite_cnt);
-                        iv_favorite.setBackgroundResource(R.drawable.ic_bookmark_grey);
-                        set_favorite(book_id, "CANCEL");
-                    } else if (v.getTag().equals(FAVORITE_CANCEL)) {
-                        int cnt = Integer.parseInt(tv_favorite_cnt.getText().toString());
-                        cnt = cnt + 1;
-                        iv_favorite.setBackgroundResource(R.drawable.ic_bookmark);
-                        tv_favorite_cnt.setVisibility(View.VISIBLE);
-                        tv_favorite_cnt.setText(String.valueOf(cnt));
-                        v.setTag(FAVORITE_OK);
-                        YoYo.with(Techniques.RotateIn)
-                                .duration(200)
-                                .playOn(iv_favorite);
-
-                        YoYo.with(Techniques.BounceInUp)
-                                .duration(300)
-                                .playOn(tv_favorite_cnt);
-
-                        set_favorite(book_id, "OK");
-                    }
-                }
-            });
-
-
-        }
-
-        private void set_favorite(String book_id, String flag) {
-            ServiceGenerator.getService().set_favorite(book_id, flag, new Callback<Void>() {
-                @Override
-                public void success(Void aVoid, Response response) {
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                }
-            });
-        }
-
-        public void showMedia(String[] image) {
-            mSelectedImagesContainer.removeAllViews();
-            mSelectedImagesContainer.setVisibility(View.VISIBLE);
-
-            int wdpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, itemView.getResources().getDisplayMetrics());
-            int htpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, itemView.getResources().getDisplayMetrics());
-
-            for (String uri : image) {
-                if (!ObjectUtils.isEmpty(uri.toString())) {
-                    View imageHolder = LayoutInflater.from(itemView.getContext()).inflate(R.layout.page1_image_item, null);
-                    ImageView thumbnail = (ImageView) imageHolder.findViewById(R.id.media_image);
-
-                    int book_rotate = 0;
-                    if (!uri.isEmpty()) book_rotate = Character.getNumericValue(uri.charAt(9));
-
-                    Picasso.with(mContext)
-                            .load(base_image_url_uploads + uri)
-                            .rotate(orientation(book_rotate))
-                            .into(thumbnail);
-                    mSelectedImagesContainer.addView(imageHolder);
-                    thumbnail.setLayoutParams(new FrameLayout.LayoutParams(wdpx, htpx));
-                }
-            }
-        }
-
-    }
-    //디테일 액티비티에서 돌아왔을때 즐겨찾기 상태확인
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQ_CODE) {
-                item_position = data.getIntExtra("item_position", 0);
-                book_id = data.getStringExtra("book_id");
-                ServiceGenerator.getService().get_position_item(book_id, new Callback<List<Book_Info>>() {
-                    @Override
-                    public void success(List<Book_Info> book_info, Response response) {
-                        String ct_count = book_info.get(0).getComment_count();
-                        String fa_count = book_info.get(0).getFavorite_count();
-                        String fa_chk = book_info.get(0).getFavorite_chk();
-                        bookInfos.get(item_position).setComment_count(ct_count);
-                        bookInfos.get(item_position).setFavorite_chk(fa_chk);
-                        bookInfos.get(item_position).setFavorite_count(fa_count);
-                        notifyItemChanged(item_position);
-
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-
-                    }
-                });
-            } else if (requestCode == REQ_CODE2) {
-                item_position = data.getIntExtra("item_position", 0);
-                book_id = data.getStringExtra("book_id");
-                Boolean remove_flag = data.getBooleanExtra("remove_flag", false);
-                if (remove_flag) {
-                    bookInfos.remove(item_position);
-                    notifyItemRemoved(item_position);
-                    notifyItemRangeChanged(item_position, getItemCount());
-                } else {
-                    ServiceGenerator.getService().get_position_item(book_id, new Callback<List<Book_Info>>() {
-                        @Override
-                        public void success(List<Book_Info> book_info, Response response) {
-                            String ct_count = book_info.get(0).getComment_count();
-                            String fa_count = book_info.get(0).getFavorite_count();
-                            String fa_chk = book_info.get(0).getFavorite_chk();
-                            String sold_out = book_info.get(0).getSold_kind();
-                            bookInfos.get(item_position).setComment_count(ct_count);
-                            bookInfos.get(item_position).setFavorite_chk(fa_chk);
-                            bookInfos.get(item_position).setFavorite_count(fa_count);
-                            bookInfos.get(item_position).setSold_kind(sold_out);
-                            notifyItemChanged(item_position);
-
-                        }
-
-                        @Override
-                        public void failure(RetrofitError error) {
-
-                        }
-                    });
-                }
-            }
-        }
-
     }
 
-    private int orientation(int orientation) {
 
-        int rotate = 0;
-
-        if (orientation == 2)
-            rotate = 0;
-        else if (orientation == 3)
-            rotate = 180;
-        else if (orientation == 4)
-            rotate = 180;
-        else if (orientation == 5)
-            rotate = 90;
-        else if (orientation == 6)
-            rotate = 90;
-        else if (orientation == 7)
-            rotate = -90;
-        else if (orientation == 8)
-            rotate = -90;
-
-        return rotate;
-    }
 }

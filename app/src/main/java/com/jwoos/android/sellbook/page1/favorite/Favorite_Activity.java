@@ -1,76 +1,65 @@
 package com.jwoos.android.sellbook.page1.favorite;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.jwoos.android.sellbook.R;
 import com.jwoos.android.sellbook.base.BaseActivity;
-import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
-import com.jwoos.android.sellbook.base.retrofit.model.Favorites;
-import com.jwoos.android.sellbook.page1.adapter.FavoriteAdapter;
-
-import java.util.List;
+import com.jwoos.android.sellbook.page1.grouplist.Grouplist_Fragment;
 
 import butterknife.BindView;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class Favorite_Activity extends BaseActivity {
 
-    @BindView(R.id.recycler_view)
-    RecyclerView rv;
 
-    private RecyclerView.LayoutManager mLayoutManager;
-    private FavoriteAdapter adapter;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite);
+        setContentView(R.layout.activity_container);
         setToolbar("즐겨찾기");
 
-        rv.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        rv.setLayoutManager(mLayoutManager);
-
-        setAdapter();
-
-    }
-
-    private void setAdapter() {
-        ServiceGenerator.getService().get_favorite_item(new Callback<List<Favorites>>() {
+        this.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void success(List<Favorites> favorites, Response response) {
-                adapter = new FavoriteAdapter(Favorite_Activity.this, favorites);
-                rv.setAdapter(adapter);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new Favorite_Fragment())
+                    .commit();
+        }
+
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        adapter.onActivityResult(requestCode, resultCode, data);
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count > 0) {
+            //stack에 1개이상 저장되어있을경우 진입
+            getSupportActionBar().setTitle("즐겨찾기");
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cancelToast();
     }
+
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
-        cancelToast();
     }
+
 }
 

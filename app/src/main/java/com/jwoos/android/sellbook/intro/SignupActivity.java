@@ -17,6 +17,7 @@ import com.jwoos.android.sellbook.base.BaseActivity;
 import com.jwoos.android.sellbook.base.Gloval;
 import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
 import com.jwoos.android.sellbook.base.retrofit.model.Login;
+import com.jwoos.android.sellbook.utils.Dlog;
 import com.jwoos.android.sellbook.utils.ObjectUtils;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.Spinner;
@@ -105,6 +106,7 @@ public class SignupActivity extends BaseActivity {
                             et_id.setEnabled(true);
                             btn_id_chk.setEnabled(true);
                             showToast("다시 시도해주세요");
+                            Dlog.e(error.getMessage());
                         }
                     });
                 } else {

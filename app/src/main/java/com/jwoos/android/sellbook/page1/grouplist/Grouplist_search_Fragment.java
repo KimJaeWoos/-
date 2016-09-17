@@ -1,31 +1,26 @@
 package com.jwoos.android.sellbook.page1.grouplist;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener;
 import com.jwoos.android.sellbook.R;
 import com.jwoos.android.sellbook.base.BaseFragment;
 import com.jwoos.android.sellbook.base.retrofit.ServiceGenerator;
 import com.jwoos.android.sellbook.base.retrofit.model.Book_Info;
 import com.jwoos.android.sellbook.page1.adapter.GroupAdapter;
-import com.jwoos.android.sellbook.page1.adapter.RecyclerItemClickListener;
-import com.melnykov.fab.FloatingActionButton;
+import com.jwoos.android.sellbook.utils.Dlog;
+import com.jwoos.android.sellbook.utils.ObjectUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,25 +36,58 @@ public class Grouplist_search_Fragment extends BaseFragment {
     public Grouplist_search_Fragment() {
     }
 
+    private String search_keyword;
 
-
+    @BindView(R.id.rv)
+    RecyclerView rv;
+    @BindView(R.id.result_header)
+    TextView tv;
+    @BindView(R.id.searh_empty)
+    RelativeLayout empty_msg;
+    @BindView(R.id.search_ment)
+    TextView tv_msg;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_grouplist, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         ButterKnife.bind(this, rootView);
-
-
-
-
-        //검색 숨기기, 타이틀바셋팅
-        //((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(search_keyword);
+        initialize();
 
 
         return rootView;
     }
+
+    private void initialize() {
+        search_keyword = getArguments().getString("keyword");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(search_keyword);
+        ServiceGenerator.getService().getBook_search(search_keyword, new Callback<List<Book_Info>>() {
+            @Override
+            public void success(List<Book_Info> book_infos, Response response) {
+                if (!book_infos.get(0).getEmpty_chk().equals("empty")) {
+                    tv.setText("총 " + book_infos.size() +"건 검색");
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    rv.setHasFixedSize(true);
+                    rv.setLayoutManager(layoutManager);
+                    GroupAdapter rvAdapter = new GroupAdapter(getActivity(), book_infos);
+                    rv.setAdapter(rvAdapter);
+                } else {
+                    tv.setVisibility(View.GONE);
+                    empty_msg.setVisibility(View.VISIBLE);
+                    tv_msg.setText("'" + search_keyword + "'" + "검색결과가 없습니다");
+                }
+
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Dlog.e(error.getMessage());
+            }
+        });
+    }
+
 
 
 

@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
-import retrofit.converter.SimpleXMLConverter;
 
 /**
  * Created by renegens on 16/02/16.
@@ -17,6 +16,7 @@ import retrofit.converter.SimpleXMLConverter;
 public class ServiceGenerator {
 
     private static final String API_BASE_URL = "http://fack14.cafe24.com/SellBook";
+    private static final String API_BASE_URL2 = "http://www.aladin.co.kr/ttb/api";
     private static final long tiempoMaximoRespuestaSegundos = 600;
     private static final long tiempoMaximoLecturaSegundos = 1000;
     private static OkHttpClient clienteOkHttp = new OkHttpClient();
@@ -25,7 +25,6 @@ public class ServiceGenerator {
     private static RestAdapter.Builder builder = new RestAdapter.Builder()
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .setEndpoint(API_BASE_URL)
-            .setConverter(new SimpleXMLConverter())
             .setClient(new OkClient(clienteOkHttp));
 
 
@@ -36,8 +35,6 @@ public class ServiceGenerator {
 
                 request.addHeader("Authorization", "auth-value");
                 request.addHeader("Accept", "application/json");
-                request.addHeader("X-Naver-Client-Id","S3Uth6DNCQTj6psKgg8I");
-                request.addHeader("X-Naver-Client-Secret","GyFh_DlXGW");
             }
         });
         clienteOkHttp.interceptors().add(new AddCookiesInterceptor());

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/result_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center"
+        android:padding="20dp"
+        android:text="asdas"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="1dp"
+            android:id="@+id/rv"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout
+            android:id="@+id/searh_empty"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/search_main"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:background="@drawable/notebook_search" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/search_main"
+                android:id="@+id/search_ment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:lineSpacingExtra="10dip"
+                android:text="구매를 원하는 책 제목, 저자, 또는 ISBN번호를 입력해주세요"
+                android:textSize="20dp" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

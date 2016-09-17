@@ -74,7 +74,7 @@ public class Grouplist_Activity extends BaseActivity {
                 search.setArguments(argruments);
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-                ft.add(R.id.container, search);
+                ft.replace(R.id.container, search);
                 ft.addToBackStack(null);
                 ft.commit();
                 item.setVisible(false);

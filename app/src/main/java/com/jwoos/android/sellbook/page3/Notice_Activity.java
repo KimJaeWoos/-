@@ -144,7 +144,6 @@ public class Notice_Activity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(0, 0);
         super.onBackPressed();
     }
     @Override

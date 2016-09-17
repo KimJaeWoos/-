@@ -16,7 +16,7 @@
             android:id="@+id/search_main"
             android:layout_width="130dp"
             android:layout_height="100dp"
-            android:background="@drawable/iv_book" />
+            android:background="@drawable/books" />
         <TextView
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/search_main"

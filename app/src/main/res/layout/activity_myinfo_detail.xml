@@ -13,37 +13,15 @@
         android:elevation="4dp"
         app:titleTextColor="@color/md_white_1000">
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:text="판매도서 정보"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:padding="10dp">
-
-                <com.jwoos.android.sellbook.widget.MLRoundedImageView
-                    android:id="@+id/toolbar_img"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:scaleType="center" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/toolbar_nic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="12dp"
-                android:textColor="@color/btn_background"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="40dp"
@@ -64,18 +42,19 @@
                 android:src="@drawable/ic_delete_white" />
 
         </com.balysv.materialripple.MaterialRippleLayout>
-    </android.support.v7.widget.Toolbar>
 
+    </android.support.v7.widget.Toolbar>
     <ScrollView
         android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar">
+        android:layout_above="@+id/btn_menu"
+        android:layout_below="@+id/toolbar"
+        android:focusableInTouchMode="true">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,84 +82,263 @@
 
                 </FrameLayout>
 
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:paddingBottom="16dp"
-                    android:paddingRight="18dp"
-                    android:paddingTop="18dp">
+                    android:padding="18dp">
+
+                    <TextView
+                        android:id="@+id/price_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="판매가"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
                     <com.jwoos.android.sellbook.widget.RialTextView
                         android:id="@+id/detail2_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp" />
+                        android:text="20000"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/book_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginRight="10dp"
-                        android:layout_toLeftOf="@+id/detail2_price"
+                        android:layout_below="@+id/price_title"
+                        android:layout_marginTop="10dp"
+                        android:text="정가"
                         android:textColor="@color/btn_text_color"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textSize="15sp" />
+
+                    <com.jwoos.android.sellbook.widget.RialTextView
+                        android:id="@+id/after_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/detail2_price"
+                        android:layout_marginTop="10dp"
+                        android:text="20000"
+                        android:textSize="15sp" />
+
 
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/md_grey_600" />
+                    android:layout_height="15dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:padding="13dp">
+                    android:padding="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/user_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="판매자"
+                            android:textSize="15sp" />
+
+                        <LinearLayout
+                            android:id="@+id/user_profile_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/user_title">
+
+                            <com.jwoos.android.sellbook.widget.MLRoundedImageView
+                                android:id="@+id/user_img"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:id="@+id/user_nic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3dp"
+                                android:layout_toRightOf="@+id/user_img"
+                                android:text="맛간동자"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/user_profile_container"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/user_title"
+                            android:text="판매자 판매 교재 보러가기 >"
+                            android:textSize="15sp" />
+
+
+                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/book_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/btn_text_color"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/btn_background_color" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/codition_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="책상태"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:background="@drawable/condition_guide"
+                            android:id="@+id/condition_guide"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/codition_title">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/book_condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/codition_title"
+                            android:text="A+"
+                            android:textColor="@color/red"
+                            android:textSize="15sp" />
+
+                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/book_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/btn_text_color"
-                        android:textSize="15sp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/btn_background_color" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/category_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="카테고리"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/book_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="37dp"
+                            android:layout_toRightOf="@+id/category_title"
+                            android:singleLine="true"
+                            android:text="프로그래밍"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                    </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:textSize="13sp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/btn_background_color" />
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <TextView
+                            android:id="@+id/description_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="책내용"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/book_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/description_title"
+                            android:lineSpacingExtra="8dp"
+                            android:text="전 세계의 수많은 개발자가 사용하고 있는 GitHub를 실무에서 어떻게 사용하는지 설명하는 책이다. 따라서 GitHub의 기본적인 사용 방법뿐만 아니라, GitHub를 활용한 개발"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/btn_background_color" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/board_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="판매글"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/book_board"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_toRightOf="@+id/board_title"
+                            android:lineSpacingExtra="8dp"
+                            android:text="전 세계의 수많은 개발자가 사용하고 있는 GitHub를 실무에서 어떻게 사용하는지 설명하는 책이다. 따라서 GitHub의 기본적인 사용 방법뿐만 아니라, GitHub를 활용한 개발"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                    </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="200px"
-                    android:background="@color/white" />
             </LinearLayout>
 
             <TextView
@@ -193,6 +351,7 @@
                 android:textColor="@color/btn_background_color"
                 android:textSize="23sp"
                 android:visibility="gone" />
+
         </FrameLayout>
     </ScrollView>
 

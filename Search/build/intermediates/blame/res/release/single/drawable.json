@@ -60,12 +60,12 @@
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
-        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_thumb_material.xml",
-        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
-    },
-    {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable\\abc_ratingbar_small_material.xml",
         "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
     },
     {
         "merged": "C:\\Android Project\\SellBook-repo\\SellBook-Project\\Search\\build\\intermediates\\res\\merged\\release\\drawable\\abc_edit_text_material.xml",

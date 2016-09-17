@@ -1,7 +1,5 @@
 package com.jwoos.android.sellbook.base.retrofit.model;
 
-import android.print.PrinterId;
-
 /**
  * Created by Jwoo on 2016-06-11.
  */
@@ -17,20 +15,78 @@ public class Book_Info {
     private String book_image1;
     private String book_image2;
     private String book_image3;
-    private String book_image4;
-    private String book_image5;
     private String book_register_time;
     private String sold_kind;
     private String book_name;
     private String book_id;
     private String sell_count;
     private String comment_count;
-
-
     private String favorite_count;
     private String user_chk;
-
     private String favorite_chk;
+    private String book_cover;
+    private String book_sellprice;
+    private String book_condition;
+    private String book_publisher;
+    private String book_description;
+    private String book_pubDate;
+    private String book_author;
+
+    public String getBook_cover() {
+        return book_cover;
+    }
+
+    public void setBook_cover(String book_cover) {
+        this.book_cover = book_cover;
+    }
+
+    public String getBook_sellprice() {
+        return book_sellprice;
+    }
+
+    public void setBook_sellprice(String book_sellprice) {
+        this.book_sellprice = book_sellprice;
+    }
+
+    public String getBook_condition() {
+        return book_condition;
+    }
+
+    public void setBook_condition(String book_condition) {
+        this.book_condition = book_condition;
+    }
+
+    public String getBook_publisher() {
+        return book_publisher;
+    }
+
+    public void setBook_publisher(String book_publisher) {
+        this.book_publisher = book_publisher;
+    }
+
+    public String getBook_description() {
+        return book_description;
+    }
+
+    public void setBook_description(String book_description) {
+        this.book_description = book_description;
+    }
+
+    public String getBook_pubDate() {
+        return book_pubDate;
+    }
+
+    public void setBook_pubDate(String book_pubDate) {
+        this.book_pubDate = book_pubDate;
+    }
+
+    public String getBook_author() {
+        return book_author;
+    }
+
+    public void setBook_author(String book_author) {
+        this.book_author = book_author;
+    }
 
     public String getFavorite_chk() {
         return favorite_chk;
@@ -98,6 +154,7 @@ public class Book_Info {
     public void setBook_name(String book_name) {
         this.book_name = book_name;
     }
+
     public String getBook_category() {
         return book_category;
     }
@@ -200,22 +257,6 @@ public class Book_Info {
 
     public void setKind_count(String kind_count) {
         this.kind_count = kind_count;
-    }
-
-    public String getBook_image4() {
-        return book_image4;
-    }
-
-    public void setBook_image4(String book_image4) {
-        this.book_image4 = book_image4;
-    }
-
-    public String getBook_image5() {
-        return book_image5;
-    }
-
-    public void setBook_image5(String book_image5) {
-        this.book_image5 = book_image5;
     }
 
 

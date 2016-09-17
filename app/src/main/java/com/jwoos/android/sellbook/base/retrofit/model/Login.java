@@ -1,12 +1,9 @@
 package com.jwoos.android.sellbook.base.retrofit.model;
 
-import com.google.gson.annotations.Expose;
 
 public class Login {
 
-    @Expose
     private String status;
-    @Expose
     private String login;
     private String user_nic;
 

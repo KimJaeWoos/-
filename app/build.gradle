@@ -20,8 +20,8 @@ android {
         applicationId "com.jwoos.android.sellbook"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 5
-        versionName "1.0.3"
+        versionCode 6
+        versionName "1.0.4"
     }
     buildTypes {
         release {
@@ -43,6 +43,10 @@ android {
             minifyEnabled false
             proguardFile 'proguard-rules.txt'
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -98,9 +102,7 @@ dependencies {
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'org.jsoup:jsoup:1.9.2'
     compile project(':materialbarcodescanner')
-    compile ('com.squareup.retrofit:converter-simplexml:1.9.0') {
-        exclude group: 'xpp3', module: 'xpp3'
-        exclude group: 'stax', module: 'stax-api'
-        exclude group: 'stax', module: 'stax'
-    }
+    compile 'gun0912.ted:tedbottompicker:1.0.2'
+
+
 }

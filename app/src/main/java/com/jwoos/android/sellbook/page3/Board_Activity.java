@@ -51,7 +51,7 @@ public class Board_Activity extends BaseActivity {
 
         if(count == 1) {//홈페이지
             setToolbar("셀북 홈페이지");
-            wb.loadUrl("http://soo4131.cafe24.com/xe");
+            wb.loadUrl("http://soo4131.cafe24.com");
         }
         else if(count == 2){//페이스북
             setToolbar("셀북 페이스북");
@@ -78,7 +78,6 @@ public class Board_Activity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(0, 0);
         super.onBackPressed();
     }
 

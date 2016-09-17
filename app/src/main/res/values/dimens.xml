@@ -14,8 +14,8 @@
 
     <!-- page3 -->
     <dimen name="page2_margin_left">15dp</dimen>
-    <dimen name="btn_text_size">16sp</dimen>
-    <dimen name="btn_colortext_size">14sp</dimen>
+    <dimen name="btn_text_size">15sp</dimen>
+    <dimen name="btn_colortext_size">13sp</dimen>
     <dimen name="padding_left">20dp</dimen>
 
     <dimen name="font_body">16dp</dimen>

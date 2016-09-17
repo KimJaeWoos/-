@@ -56,10 +56,10 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_marginBottom="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="25dp"
                     android:background="@color/btn_background2"
                     android:orientation="horizontal">
 
@@ -141,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
 
             <!-- As our statusBar is transparent below and content is moved behind our toolbar has to include the padding on top so we use this area -->
@@ -157,12 +157,50 @@
         android:background="@color/md_blue_grey_50"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/md_blue_grey_50"
-            android:scrollbars="vertical" />
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/md_blue_grey_50"
+                android:scrollbars="vertical" />
+
+            <RelativeLayout
+                android:layout_marginTop="150dp"
+                android:id="@+id/searh_empty"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/search_main"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/notebook_sell" />
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/search_main"
+                    android:id="@+id/search_ment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="10dip"
+                    android:text="등록된 중고책이 없습니다"
+                    android:textSize="20dp" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

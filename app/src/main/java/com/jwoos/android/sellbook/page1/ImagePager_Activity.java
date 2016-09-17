@@ -28,7 +28,7 @@ public class ImagePager_Activity extends BaseActivity {
 
 
     private static String base_url = Gloval.getBase_image_url_uploads();
-    private String book_img1, book_img2, book_img3, book_img4, book_img5;
+    private String book_img1, book_img2, book_img3;
     private static String[] images;
 
     private ViewPager mViewPager;
@@ -44,8 +44,6 @@ public class ImagePager_Activity extends BaseActivity {
         book_img1 = bundle.getString("image1");
         book_img2 = bundle.getString("image2");
         book_img3 = bundle.getString("image3");
-        book_img4 = bundle.getString("image4");
-        book_img5 = bundle.getString("image5");
         setImage_url();
 
         tv_count.setText((1+"/"+images.length));
@@ -78,12 +76,8 @@ public class ImagePager_Activity extends BaseActivity {
             images = new String[]{book_img1};
         } else if (book_img3.length() < 1) {
             images = new String[]{book_img1,book_img2};
-        } else if (book_img4.length() < 1) {
-            images = new String[]{book_img1,book_img2, book_img3};
-        } else if (book_img5.length() < 1) {
-            images = new String[]{book_img1,book_img2,book_img4};
         } else {
-            images = new String[]{book_img1,book_img2,book_img3,book_img4,book_img5};
+            images = new String[]{book_img1,book_img2, book_img3};
         }
     }
 
