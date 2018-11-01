@@ -2,7 +2,7 @@
 중고책 커뮤니티
 =======
 
-# 셀북 (대구대학교)
+# 셀북
 ![alt tag](https://github.com/KimJaeWoos/SellBook-Project/blob/master/unnamed.png)
 
 
@@ -28,5 +28,4 @@
 
 플레이스토어
 ----------------------
-[설치하기](https://play.google.com/store/apps/details?id=com.jwoos.android.sellbook)
 
